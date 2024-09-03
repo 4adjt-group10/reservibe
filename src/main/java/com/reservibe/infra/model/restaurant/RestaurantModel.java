@@ -1,21 +1,30 @@
-package com.reservibe.domain.entity.restaurant;
+package com.reservibe.infra.model.restaurant;
 
 import com.reservibe.domain.enums.retaurant.Cuisine;
+import com.reservibe.domain.entity.restaurant.OpeningHours;
+import jakarta.persistence.*;
 
 import java.util.List;
 import java.util.UUID;
 
-public class Restaurant {
+@Entity
+public class RestaurantModel {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String name;
     private String address;
     private String phoneNumber;
     private String description;
     private Cuisine cuisine;
+    //TODO: Fix this
+    @JoinTable(name = "restaurant_opening_hours",
+                joinColumns = @JoinColumn(name = "restaurant_id"),
+                inverseJoinColumns = @JoinColumn(name = "opening_hours_id"))
     private List<OpeningHours> openingHours;
 
-    public Restaurant(UUID id,
+    public RestaurantModel(UUID id,
                       String name,
                       String address,
                       String phoneNumber,
@@ -29,6 +38,11 @@ public class Restaurant {
         this.description = description;
         this.cuisine = cuisine;
         this.openingHours = openingHours;
+    }
+
+    @Deprecated(since = "Only for framework use")
+    public RestaurantModel() {
+
     }
 
     public UUID getId() {
