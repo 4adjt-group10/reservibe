@@ -4,28 +4,29 @@ import com.reservibe.infra.model.restaurant.OpeningHoursModel;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class OpeningHours {
 
     private final DayOfWeek dayOfWeek;
-    private final LocalDateTime start;
-    private final LocalDateTime end;
+    private final LocalTime start;
+    private final LocalTime end;
 
-    public OpeningHours(DayOfWeek dayOfWeek, LocalDateTime start, LocalDateTime end) {
+    public OpeningHours(DayOfWeek dayOfWeek, LocalTime start, LocalTime end) {
         this.dayOfWeek = dayOfWeek;
         this.start = start;
         this.end = end;
     }
 
     public OpeningHours(OpeningHoursModel openingHoursModel) {
-        this(openingHoursModel.getDayOfWeek(), openingHoursModel.getStart(), openingHoursModel.getEnd());
+        this(openingHoursModel.getDayOfWeek(), openingHoursModel.getStartAt(), openingHoursModel.getEndAt());
     }
 
-    public LocalDateTime getStart() {
+    public LocalTime getStart() {
         return start;
     }
 
-    public LocalDateTime getEnd() {
+    public LocalTime getEnd() {
         return end;
     }
 
@@ -34,7 +35,9 @@ public class OpeningHours {
     }
 
     public boolean isOpen(LocalDateTime dateTime) {
-        return dateTime.getDayOfWeek().equals(dayOfWeek) && dateTime.isAfter(start) && dateTime.isBefore(end);
+        return dateTime.getDayOfWeek().equals(dayOfWeek)
+                && !dateTime.toLocalTime().isBefore(start)
+                && !dateTime.toLocalTime().isAfter(end);
     }
 
     public boolean isClosed(LocalDateTime dateTime) {
@@ -42,42 +45,11 @@ public class OpeningHours {
     }
 
     public boolean isBeforeOpening(LocalDateTime dateTime) {
-        return dateTime.getDayOfWeek().equals(dayOfWeek) && dateTime.isBefore(start);
+        return dateTime.getDayOfWeek().equals(dayOfWeek) && dateTime.toLocalTime().isBefore(start);
     }
 
     public boolean isAfterClosing(LocalDateTime dateTime) {
-        return dateTime.getDayOfWeek().equals(dayOfWeek) && dateTime.isAfter(end);
+        return dateTime.getDayOfWeek().equals(dayOfWeek) && dateTime.toLocalTime().isAfter(end);
     }
 
-    public boolean isBeforeOrAfterOpening(LocalDateTime dateTime) {
-        return isBeforeOpening(dateTime) || isAfterClosing(dateTime);
-    }
-
-    public boolean isBeforeOrAfterClosing(LocalDateTime dateTime) {
-        return isBeforeOpening(dateTime) || isAfterClosing(dateTime);
-    }
-
-    public boolean isBeforeOrAfterOpeningOrClosing(LocalDateTime dateTime) {
-        return isBeforeOpening(dateTime) || isAfterClosing(dateTime);
-    }
-
-    public boolean isBeforeOrAfterOpeningAndClosing(LocalDateTime dateTime) {
-        return isBeforeOpening(dateTime) || isAfterClosing(dateTime);
-    }
-
-    public boolean isBeforeOrAfterOpeningOrClosingOrBoth(LocalDateTime dateTime) {
-        return isBeforeOpening(dateTime) || isAfterClosing(dateTime);
-    }
-
-    public boolean isBeforeOrAfterOpeningAndClosingOrBoth(LocalDateTime dateTime) {
-        return isBeforeOpening(dateTime) || isAfterClosing(dateTime);
-    }
-
-    public boolean isBeforeOrAfterOpeningAndClosingOrBothOrNone(LocalDateTime dateTime) {
-        return isBeforeOpening(dateTime) || isAfterClosing(dateTime);
-    }
-
-    public boolean isBeforeOrAfterOpeningAndClosingOrBothOrNoneOrAll(LocalDateTime dateTime) {
-        return isBeforeOpening(dateTime) || isAfterClosing(dateTime);
-    }
 }

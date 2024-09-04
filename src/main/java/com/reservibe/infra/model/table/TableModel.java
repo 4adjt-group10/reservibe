@@ -1,10 +1,7 @@
 package com.reservibe.infra.model.table;
 
 import com.reservibe.domain.enums.table.TableStatus;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.UUID;
 
@@ -16,6 +13,7 @@ public class TableModel {
     private UUID id;
     private Integer number;
     private int seats;
+    @Enumerated(EnumType.STRING)
     private TableStatus status;
 
     public TableModel(Integer number, int seats, TableStatus status) {

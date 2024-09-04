@@ -15,8 +15,6 @@ public class Review {
     private LocalDateTime reviewDate;
     private String comment;
 
-    public Review() {}
-
     public Review(UUID id, Restaurant restaurant, Client client, ReviewStars reviewStars, LocalDateTime reviewDate, String comment) {
         this.id = id;
         this.restaurant = restaurant;
@@ -25,6 +23,9 @@ public class Review {
         this.reviewDate = reviewDate;
         this.comment = comment;
     }
+
+    @Deprecated(since = "Only for framework use")
+    public Review() {}
 
     public UUID getId() {
         return id;

@@ -19,6 +19,7 @@ public class RestaurantModel {
     private String description;
     private Cuisine cuisine;
     @OneToMany
+    @JoinColumn(name = "restaurant_id")
     private List<OpeningHoursModel> openingHours;
 
     public RestaurantModel(UUID id,
