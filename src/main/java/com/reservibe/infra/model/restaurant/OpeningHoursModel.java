@@ -1,5 +1,6 @@
 package com.reservibe.infra.model.restaurant;
 
+import com.reservibe.domain.entity.restaurant.OpeningHours;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,6 +31,12 @@ public class OpeningHoursModel {
 
     }
 
+    public OpeningHoursModel(OpeningHours openingHours) {
+        this.dayOfWeek = openingHours.getDayOfWeek();
+        this.start = openingHours.getStart();
+        this.end = openingHours.getEnd();
+    }
+
     public LocalDateTime getStart() {
         return start;
     }
@@ -41,4 +48,5 @@ public class OpeningHoursModel {
     public DayOfWeek getDayOfWeek() {
         return dayOfWeek;
     }
+
 }

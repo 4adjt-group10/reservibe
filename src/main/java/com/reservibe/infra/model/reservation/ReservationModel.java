@@ -1,26 +1,33 @@
-package com.reservibe.domain.entity.reservation;
+package com.reservibe.infra.model.reservation;
 
-import com.reservibe.domain.entity.client.Client;
-import com.reservibe.domain.entity.restaurant.Restaurant;
-import com.reservibe.domain.entity.table.Table;
 import com.reservibe.domain.enums.reservation.ReservationStatus;
+import com.reservibe.infra.model.client.ClientModel;
+import com.reservibe.infra.model.restaurant.RestaurantModel;
+import com.reservibe.infra.model.table.TableModel;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-public class Reservation {
+@Entity
+public class ReservationModel {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    private Client client;
+    @ManyToOne
+    private ClientModel client;
     private ReservationStatus status;
     private LocalDateTime reservationDate;
-    private List<Table> tables;
+    @OneToMany
+    private List<TableModel> tables;
     private String notesObservations;
-    private Restaurant restaurant;
+    @ManyToOne
+    private RestaurantModel restaurant;
 
-    public Reservation() {}
+    public ReservationModel() {}
 
-    public Reservation(UUID id, Client client, ReservationStatus status, LocalDateTime reservationDate, List<Table> tables, String notesObservations, Restaurant restaurant) {
+    public ReservationModel(UUID id, ClientModel client, ReservationStatus status, LocalDateTime reservationDate, List<TableModel> tables, String notesObservations, RestaurantModel restaurant) {
         this.id = id;
         this.client = client;
         this.status = status;
@@ -34,7 +41,7 @@ public class Reservation {
         return id;
     }
 
-    public Client getClient() {
+    public ClientModel getClient() {
         return client;
     }
 
@@ -46,7 +53,7 @@ public class Reservation {
         return reservationDate;
     }
 
-    public List<Table> getTables() {
+    public List<TableModel> getTables() {
         return tables;
     }
 
@@ -54,7 +61,8 @@ public class Reservation {
         return notesObservations;
     }
 
-    public Restaurant getRestaurant() {
+    public RestaurantModel getRestaurant() {
         return restaurant;
     }
 }
+

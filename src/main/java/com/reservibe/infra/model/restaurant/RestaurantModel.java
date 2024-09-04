@@ -18,11 +18,8 @@ public class RestaurantModel {
     private String phoneNumber;
     private String description;
     private Cuisine cuisine;
-    //TODO: Fix this
-    @JoinTable(name = "restaurant_opening_hours",
-                joinColumns = @JoinColumn(name = "restaurant_id"),
-                inverseJoinColumns = @JoinColumn(name = "opening_hours_id"))
-    private List<OpeningHours> openingHours;
+    @OneToMany
+    private List<OpeningHoursModel> openingHours;
 
     public RestaurantModel(UUID id,
                       String name,
@@ -37,7 +34,12 @@ public class RestaurantModel {
         this.phoneNumber = phoneNumber;
         this.description = description;
         this.cuisine = cuisine;
-        this.openingHours = openingHours;
+        if(!openingHours.isEmpty()){
+            openingHours.forEach(o -> {
+                OpeningHoursModel openingHoursModel = new OpeningHoursModel(o);
+                this.openingHours.add(openingHoursModel);
+            });
+        }
     }
 
     @Deprecated(since = "Only for framework use")
@@ -69,7 +71,7 @@ public class RestaurantModel {
         return cuisine;
     }
 
-    public List<OpeningHours> getOpeningHours() {
+    public List<OpeningHoursModel> getOpeningHours() {
         return openingHours;
     }
 }

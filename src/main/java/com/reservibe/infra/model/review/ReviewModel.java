@@ -1,23 +1,28 @@
-package com.reservibe.domain.entity.review;
+package com.reservibe.infra.model.review;
 
-import com.reservibe.domain.entity.client.Client;
-import com.reservibe.domain.entity.restaurant.Restaurant;
 import com.reservibe.domain.enums.review.ReviewStars;
+import com.reservibe.infra.model.client.ClientModel;
+import com.reservibe.infra.model.restaurant.RestaurantModel;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
-
-public class Review {
+@Entity
+public class ReviewModel {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    private Restaurant restaurant;
-    private Client client;
+    @ManyToOne
+    private RestaurantModel restaurant;
+    @ManyToOne
+    private ClientModel client;
     private ReviewStars reviewStars;
     private LocalDateTime reviewDate;
     private String comment;
 
-    public Review() {}
+    public ReviewModel() {}
 
-    public Review(UUID id, Restaurant restaurant, Client client, ReviewStars reviewStars, LocalDateTime reviewDate, String comment) {
+    public ReviewModel(UUID id, RestaurantModel restaurant, ClientModel client, ReviewStars reviewStars, LocalDateTime reviewDate, String comment) {
         this.id = id;
         this.restaurant = restaurant;
         this.client = client;
@@ -30,11 +35,11 @@ public class Review {
         return id;
     }
 
-    public Restaurant getRestaurant() {
+    public RestaurantModel getRestaurant() {
         return restaurant;
     }
 
-    public Client getClient() {
+    public ClientModel getClient() {
         return client;
     }
 
@@ -50,3 +55,4 @@ public class Review {
         return comment;
     }
 }
+
