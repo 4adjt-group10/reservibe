@@ -17,9 +17,11 @@ public class ReservationModel {
     private UUID id;
     @ManyToOne
     private ClientModel client;
+    @Enumerated(EnumType.STRING)
     private ReservationStatus status;
     private LocalDateTime reservationDate;
     @OneToMany
+    @JoinColumn(name = "reservation_id")
     private List<TableModel> tables;
     private String notesObservations;
     @ManyToOne

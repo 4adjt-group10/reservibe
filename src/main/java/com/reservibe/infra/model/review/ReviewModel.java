@@ -16,6 +16,7 @@ public class ReviewModel {
     private RestaurantModel restaurant;
     @ManyToOne
     private ClientModel client;
+    @Enumerated(EnumType.STRING)
     private ReviewStars reviewStars;
     private LocalDateTime reviewDate;
     private String comment;

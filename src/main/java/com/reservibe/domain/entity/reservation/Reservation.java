@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class Reservation {
+
     private UUID id;
     private Client client;
     private ReservationStatus status;
@@ -17,8 +18,6 @@ public class Reservation {
     private List<Table> tables;
     private String notesObservations;
     private Restaurant restaurant;
-
-    public Reservation() {}
 
     public Reservation(UUID id, Client client, ReservationStatus status, LocalDateTime reservationDate, List<Table> tables, String notesObservations, Restaurant restaurant) {
         this.id = id;
@@ -29,6 +28,9 @@ public class Reservation {
         this.notesObservations = notesObservations;
         this.restaurant = restaurant;
     }
+
+    @Deprecated(since = "Only for framework use")
+    public Reservation() {}
 
     public UUID getId() {
         return id;
