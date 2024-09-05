@@ -8,15 +8,15 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.UUID;
 
-public interface OpeningHoursRepository extends JpaRepository<OpeningHoursModel, Long> {
+public interface OpeningHoursRepository extends JpaRepository<OpeningHoursModel, UUID> {
 
     List<OpeningHoursModel> findAllByRestaurantId(UUID restaurantId);
 
-    List<OpeningHoursModel> findAllByDayOfWeekAnd(DayOfWeek dayOfWeek);
+    List<OpeningHoursModel> findAllByDayOfWeek(DayOfWeek dayOfWeek);
 
-    List<OpeningHoursModel> findAllByDayOfWeekAndAndRestaurantId(DayOfWeek dayOfWeek, Long restaurantId);
+    List<OpeningHoursModel> findAllByDayOfWeekAndRestaurantId(DayOfWeek dayOfWeek, UUID restaurantId);
 
-    List<OpeningHoursModel> findAllByDayOfWeekAndAndStartAtGreaterThanEqualAndEndAtLessThanEqual(DayOfWeek dayOfWeek, LocalTime startAt, LocalTime endAt);
+    List<OpeningHoursModel> findAllByDayOfWeekAndStartAtGreaterThanEqualAndEndAtLessThanEqual(DayOfWeek dayOfWeek, LocalTime startAt, LocalTime endAt);
 
     List<OpeningHoursModel> findAllByDayOfWeekAndStartAtGreaterThanEqualAndEndAtLessThanEqualAndRestaurantId(DayOfWeek dayOfWeek, LocalTime startAt, LocalTime endAt, UUID restaurantId);
 }
