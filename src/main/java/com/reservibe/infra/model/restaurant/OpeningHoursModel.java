@@ -17,11 +17,14 @@ public class OpeningHoursModel {
     private DayOfWeek dayOfWeek;
     private LocalTime startAt;
     private LocalTime endAt;
+    @Column(name = "restaurant_id")
+    private UUID restaurantId;
 
-    public OpeningHoursModel(DayOfWeek dayOfWeek, LocalTime startAt, LocalTime endAt) {
+    public OpeningHoursModel(DayOfWeek dayOfWeek, LocalTime startAt, LocalTime endAt, UUID restaurantId) {
         this.dayOfWeek = dayOfWeek;
         this.startAt = startAt;
         this.endAt = endAt;
+        this.restaurantId = restaurantId;
     }
 
     @Deprecated(since = "Only for framework use")
@@ -47,4 +50,7 @@ public class OpeningHoursModel {
         return dayOfWeek;
     }
 
+    public UUID getRestaurantId() {
+        return restaurantId;
+    }
 }
