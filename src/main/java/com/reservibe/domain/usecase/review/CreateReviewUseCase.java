@@ -1,4 +1,4 @@
-package com.reservibe.domain.useCase.review;
+package com.reservibe.domain.usecase.review;
 
 import com.reservibe.domain.gateway.client.FindClientInterface;
 import com.reservibe.domain.gateway.review.CreateReviewInterface;

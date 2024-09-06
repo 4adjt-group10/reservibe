@@ -2,6 +2,7 @@ package com.reservibe.domain.entity.restaurant;
 
 import com.reservibe.domain.enums.retaurant.Cuisine;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -31,8 +32,25 @@ public class Restaurant {
         this.openingHours = openingHours;
     }
 
+    public Restaurant(String name,
+                      String address,
+                      String phoneNumber,
+                      String description,
+                      Cuisine cuisine) {
+        this.name = name;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.description = description;
+        this.cuisine = cuisine;
+        this.openingHours = new ArrayList<>();
+    }
+
     public UUID getId() {
         return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getName() {
