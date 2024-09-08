@@ -10,13 +10,13 @@ import java.util.UUID;
 
 public interface OpeningHoursRepository extends JpaRepository<OpeningHoursModel, Long> {
 
-    List<OpeningHoursModel> findAllByRestaurantId(UUID restaurantId);
-
-    List<OpeningHoursModel> findAllByDayOfWeekAnd(DayOfWeek dayOfWeek);
-
-    List<OpeningHoursModel> findAllByDayOfWeekAndAndRestaurantId(DayOfWeek dayOfWeek, Long restaurantId);
-
-    List<OpeningHoursModel> findAllByDayOfWeekAndAndStartAtGreaterThanEqualAndEndAtLessThanEqual(DayOfWeek dayOfWeek, LocalTime startAt, LocalTime endAt);
-
-    List<OpeningHoursModel> findAllByDayOfWeekAndStartAtGreaterThanEqualAndEndAtLessThanEqualAndRestaurantId(DayOfWeek dayOfWeek, LocalTime startAt, LocalTime endAt, UUID restaurantId);
+//    List<OpeningHoursModel> findAllByRestaurantId(UUID restaurantId);
+//
+//    List<OpeningHoursModel> findAllByDayOfWeekAnd(DayOfWeek dayOfWeek);
+//
+//    List<OpeningHoursModel> findAllByDayOfWeekAndAndRestaurantId(DayOfWeek dayOfWeek, Long restaurantId);
+//
+//    List<OpeningHoursModel> findAllByDayOfWeekAndAndStartAtGreaterThanEqualAndEndAtLessThanEqual(DayOfWeek dayOfWeek, LocalTime startAt, LocalTime endAt);
+//
+//    List<OpeningHoursModel> findAllByDayOfWeekAndStartAtGreaterThanEqualAndEndAtLessThanEqualAndRestaurantId(DayOfWeek dayOfWeek, LocalTime startAt, LocalTime endAt, UUID restaurantId);
 }
