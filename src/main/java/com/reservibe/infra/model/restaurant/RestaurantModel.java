@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -39,8 +38,7 @@ public class RestaurantModel {
         this.description = description;
         this.cuisine = cuisine;
         if(!openingHours.isEmpty()){
-            this.openingHours = new ArrayList<>();
-            //TODO: continuar fluxo
+            this.openingHours = openingHours;
         }
     }
 
@@ -56,8 +54,7 @@ public class RestaurantModel {
         this.description = description;
         this.cuisine = cuisine;
         if(!openingHours.isEmpty()){
-            this.openingHours = new ArrayList<>();
-            //TODO: continuar fluxo
+            this.openingHours = openingHours;
         }
     }
 

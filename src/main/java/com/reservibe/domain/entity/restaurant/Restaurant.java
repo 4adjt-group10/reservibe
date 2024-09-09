@@ -36,6 +36,20 @@ public class Restaurant {
                       String address,
                       String phoneNumber,
                       String description,
+                      Cuisine cuisine,
+                      List<OpeningHours> openingHours) {
+        this.name = name;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.description = description;
+        this.cuisine = cuisine;
+        this.openingHours = openingHours;
+    }
+
+    public Restaurant(String name,
+                      String address,
+                      String phoneNumber,
+                      String description,
                       Cuisine cuisine) {
         this.name = name;
         this.address = address;

@@ -1,4 +1,4 @@
-package com.reservibe.infra.repository.table.review;
+package com.reservibe.infra.repository.review;
 
 import com.reservibe.infra.model.review.ReviewModel;
 import org.springframework.data.jpa.repository.JpaRepository;
