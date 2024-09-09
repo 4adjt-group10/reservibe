@@ -1,7 +1,7 @@
 package com.reservibe.infra.model.restaurant;
 
-import com.reservibe.domain.enums.retaurant.Cuisine;
 import com.reservibe.domain.entity.restaurant.OpeningHours;
+import com.reservibe.domain.enums.retaurant.Cuisine;
 import jakarta.persistence.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
@@ -23,7 +23,7 @@ public class RestaurantModel {
     private Cuisine cuisine;
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(columnDefinition = "jsonb")
-    private List<OpeningHoursModel> openingHours;
+    private List<OpeningHours> openingHours;
 
     public RestaurantModel(UUID id,
                       String name,
@@ -39,10 +39,8 @@ public class RestaurantModel {
         this.description = description;
         this.cuisine = cuisine;
         if(!openingHours.isEmpty()){
-            openingHours.forEach(o -> {
-                OpeningHoursModel openingHoursModel = new OpeningHoursModel(o);
-                this.openingHours.add(openingHoursModel);
-            });
+            this.openingHours = new ArrayList<>();
+            //TODO: continuar fluxo
         }
     }
 
@@ -59,10 +57,7 @@ public class RestaurantModel {
         this.cuisine = cuisine;
         if(!openingHours.isEmpty()){
             this.openingHours = new ArrayList<>();
-            openingHours.forEach(o -> {
-                OpeningHoursModel openingHoursModel = new OpeningHoursModel(o);
-                this.openingHours.add(openingHoursModel);
-            });
+            //TODO: continuar fluxo
         }
     }
 
@@ -95,17 +90,8 @@ public class RestaurantModel {
         return cuisine;
     }
 
-    public List<OpeningHoursModel> getOpeningHours() {
+    public List<OpeningHours> getOpeningHours() {
         return openingHours;
     }
 
-    public void setOpeningHours(List<OpeningHours> openingHours) {
-        this.openingHours = new ArrayList<>();
-        if(!openingHours.isEmpty()){
-            openingHours.forEach(o -> {
-                OpeningHoursModel openingHoursModel = new OpeningHoursModel(o);
-                this.openingHours.add(openingHoursModel);
-            });
-        }
-    }
 }
