@@ -1,33 +1,26 @@
 package com.reservibe.domain.entity.restaurant;
 
-import com.reservibe.infra.model.restaurant.OpeningHoursModel;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.UUID;
 
 public class OpeningHours {
 
-    private UUID id;
     private DayOfWeek dayOfWeek;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+    @Schema(type = "string", pattern = "HH:mm:ss", example = "09:00:00")
     private LocalTime start;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+    @Schema(type = "string", pattern = "HH:mm:ss", example = "09:00:00")
     private LocalTime end;
-    private UUID restaurantId;
 
-
-    public OpeningHours(DayOfWeek dayOfWeek, LocalTime start, LocalTime end, UUID restaurantId) {
+    public OpeningHours(DayOfWeek dayOfWeek, LocalTime start, LocalTime end) {
         this.dayOfWeek = dayOfWeek;
         this.start = start;
         this.end = end;
-        this.restaurantId = restaurantId;
-    }
-
-    public OpeningHours(OpeningHoursModel openingHoursModel) {
-        this(openingHoursModel.getDayOfWeek(),
-                openingHoursModel.getStartAt(),
-                openingHoursModel.getEndAt(),
-                openingHoursModel.getRestaurantId());
     }
 
     public LocalTime getStart() {
