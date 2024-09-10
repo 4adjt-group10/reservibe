@@ -1,7 +1,7 @@
 package com.reservibe.application.controller.restaurant;
 
 import com.reservibe.domain.input.restaurant.RestaurantInput;
-import com.reservibe.domain.usecase.restaurant.RegisterRestaurantUseCase;
+import com.reservibe.domain.usecase.restaurant.register.RegisterRestaurantUseCase;
 import com.reservibe.infra.adapter.restaurant.RegisterRestaurantService;
 import com.reservibe.infra.repository.restaurant.RestaurantRepository;
 import jakarta.validation.Valid;

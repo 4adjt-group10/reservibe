@@ -1,4 +1,4 @@
-package com.reservibe.domain.usecase.restaurant;
+package com.reservibe.domain.usecase.restaurant.register;
 
 import com.reservibe.domain.entity.restaurant.Restaurant;
 import com.reservibe.domain.input.restaurant.RestaurantInput;
