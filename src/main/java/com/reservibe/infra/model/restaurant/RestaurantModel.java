@@ -1,5 +1,6 @@
 package com.reservibe.infra.model.restaurant;
 
+import com.reservibe.domain.entity.restaurant.Address;
 import com.reservibe.domain.entity.restaurant.OpeningHours;
 import com.reservibe.domain.enums.retaurant.Cuisine;
 import jakarta.persistence.*;
@@ -15,8 +16,11 @@ public class RestaurantModel {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+    @Column(unique = true)
     private String name;
-    private String address;
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(columnDefinition = "jsonb")
+    private Address address;
     private String phoneNumber;
     private String description;
     private Cuisine cuisine;
@@ -26,7 +30,7 @@ public class RestaurantModel {
 
     public RestaurantModel(UUID id,
                       String name,
-                      String address,
+                      Address address,
                       String phoneNumber,
                       String description,
                       Cuisine cuisine,
@@ -43,7 +47,7 @@ public class RestaurantModel {
     }
 
     public RestaurantModel(String name,
-                           String address,
+                           Address address,
                            String phoneNumber,
                            String description,
                            Cuisine cuisine,
@@ -71,7 +75,7 @@ public class RestaurantModel {
         return name;
     }
 
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
 

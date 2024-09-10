@@ -11,10 +11,10 @@ public class OpeningHours {
 
     private DayOfWeek dayOfWeek;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
-    @Schema(type = "string", pattern = "HH:mm:ss", example = "09:00:00")
+    @Schema(type = "string", pattern = "HH:mm:ss", example = "10:00:00")
     private LocalTime start;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
-    @Schema(type = "string", pattern = "HH:mm:ss", example = "09:00:00")
+    @Schema(type = "string", pattern = "HH:mm:ss", example = "22:00:00")
     private LocalTime end;
 
     public OpeningHours(DayOfWeek dayOfWeek, LocalTime start, LocalTime end) {

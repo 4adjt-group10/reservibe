@@ -1,7 +1,7 @@
 package com.reservibe.application.controller.restaurant;
 
 import com.reservibe.domain.input.restaurant.RestaurantInput;
-import com.reservibe.domain.usecase.restaurant.RegisterRestaurantUseCase;
+import com.reservibe.domain.usecase.restaurant.register.RegisterRestaurantUseCase;
 import com.reservibe.infra.adapter.restaurant.RegisterRestaurantService;
 import com.reservibe.infra.repository.restaurant.RestaurantRepository;
 import jakarta.validation.Valid;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController()
+@RestController
 @RequestMapping("/restaurant/register")
 public class RestaurantRegisterController {
 
@@ -20,7 +20,7 @@ public class RestaurantRegisterController {
         this.restaurantRepository = restaurantRepository;
     }
 
-    @PostMapping()
+    @PostMapping
     public void registerRestaurant(@RequestBody @Valid RestaurantInput input) {
         RegisterRestaurantUseCase registerRestaurantUseCase = new RegisterRestaurantUseCase(new RegisterRestaurantService(restaurantRepository));
         registerRestaurantUseCase.execute(input);
