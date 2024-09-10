@@ -2,7 +2,7 @@ package com.reservibe.domain.usecase.restaurant.search;
 
 import com.reservibe.domain.entity.restaurant.Address;
 import com.reservibe.domain.generic.output.OutputStatus;
-import com.reservibe.domain.output.restaurant.RestaurantOutput;
+import com.reservibe.domain.output.restaurant.RestaurantListOutput;
 import com.reservibe.infra.adapter.restaurant.SearchRestaurantService;
 
 public class SearchRestaurantByAddressUseCase {
@@ -13,8 +13,8 @@ public class SearchRestaurantByAddressUseCase {
         this.searchRestaurantService = searchRestaurantService;
     }
 
-    public RestaurantOutput execute(Address address) {
-        return new RestaurantOutput(searchRestaurantService.findAllByAddress(address),
+    public RestaurantListOutput execute(Address address) {
+        return new RestaurantListOutput(searchRestaurantService.findAllByAddress(address),
                 new OutputStatus(200, "OK", "Restaurants found successfully"));
     }
 }

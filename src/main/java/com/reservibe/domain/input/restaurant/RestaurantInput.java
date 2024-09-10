@@ -14,8 +14,8 @@ public record RestaurantInput(
         @NotNull(message = "The restaurant address can't be null") Address address,
         @NotBlank(message = "The restaurant phone can't be null or empty")String phoneNumber,
         @NotBlank(message = "The restaurant description can't be null or empty")String description,
-        @NotNull Cuisine cuisine,
-        @NotNull List<OpeningHours> openingHours
+        @NotNull(message = "The restaurant cuisine can't be null") Cuisine cuisine,
+        @NotNull(message = "The restaurant opening hours can't be null") List<OpeningHours> openingHours
 ) {
 
     public RestaurantInput(String name, Address address, String phoneNumber, String description, Cuisine cuisine) {

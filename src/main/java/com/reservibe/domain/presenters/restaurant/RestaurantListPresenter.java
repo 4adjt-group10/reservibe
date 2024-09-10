@@ -1,26 +1,28 @@
 package com.reservibe.domain.presenters.restaurant;
 
 import com.reservibe.domain.generic.presenter.PresenterInterface;
-import com.reservibe.domain.output.restaurant.RestaurantOutput;
+import com.reservibe.domain.output.restaurant.RestaurantListOutput;
 
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 public class RestaurantListPresenter implements PresenterInterface {
 
-    private final RestaurantOutput restaurantOutput;
+    private final RestaurantListOutput listOutput;
 
-    public RestaurantListPresenter(RestaurantOutput restaurantOutput) {
-        this.restaurantOutput = restaurantOutput;
+    public RestaurantListPresenter(RestaurantListOutput listOutput) {
+        this.listOutput = listOutput;
     }
 
     @Override
     public Map<String, Object> toMap() {
-        return Map.of();
+        Map<String, Object> map = new HashMap<>();
+        map.put("restaurants", listOutput.getBody());
+        return map;
     }
 
     @Override
-    public Object getOutput() {
-        return null;
+    public RestaurantListOutput getOutput() {
+        return listOutput;
     }
 }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController()
+@RestController
 @RequestMapping("/restaurant/register")
 public class RestaurantRegisterController {
 
@@ -20,7 +20,7 @@ public class RestaurantRegisterController {
         this.restaurantRepository = restaurantRepository;
     }
 
-    @PostMapping()
+    @PostMapping
     public void registerRestaurant(@RequestBody @Valid RestaurantInput input) {
         RegisterRestaurantUseCase registerRestaurantUseCase = new RegisterRestaurantUseCase(new RegisterRestaurantService(restaurantRepository));
         registerRestaurantUseCase.execute(input);
