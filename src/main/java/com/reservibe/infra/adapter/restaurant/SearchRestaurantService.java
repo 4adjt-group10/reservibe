@@ -2,6 +2,7 @@ package com.reservibe.infra.adapter.restaurant;
 
 import com.reservibe.domain.entity.restaurant.Address;
 import com.reservibe.domain.entity.restaurant.Restaurant;
+import com.reservibe.domain.entity.table.Table;
 import com.reservibe.domain.enums.retaurant.Cuisine;
 import com.reservibe.domain.gateway.restaurant.SearchRestaurantInterface;
 import com.reservibe.infra.repository.restaurant.RestaurantRepository;
@@ -26,7 +27,8 @@ public class SearchRestaurantService implements SearchRestaurantInterface {
                         restaurantModel.getPhoneNumber(),
                         restaurantModel.getDescription(),
                         restaurantModel.getCuisine(),
-                        restaurantModel.getOpeningHours())
+                        restaurantModel.getOpeningHours(), restaurantModel.getTables().stream()
+                        .map(t -> new Table(t.getNumber(), t.getSeats(), t.getStatus())).toList())
         ).orElseThrow(() -> new EntityNotFoundException("Restaurant not found"));
     }
 
@@ -39,7 +41,8 @@ public class SearchRestaurantService implements SearchRestaurantInterface {
                         restaurantModel.getPhoneNumber(),
                         restaurantModel.getDescription(),
                         restaurantModel.getCuisine(),
-                        restaurantModel.getOpeningHours())
+                        restaurantModel.getOpeningHours(), restaurantModel.getTables().stream()
+                        .map(t -> new Table(t.getNumber(), t.getSeats(), t.getStatus())).toList())
         ).toList();
     }
 
@@ -52,7 +55,9 @@ public class SearchRestaurantService implements SearchRestaurantInterface {
                         restaurantModel.getPhoneNumber(),
                         restaurantModel.getDescription(),
                         restaurantModel.getCuisine(),
-                        restaurantModel.getOpeningHours())
+                        restaurantModel.getOpeningHours(),
+                        restaurantModel.getTables().stream()
+                        .map(t -> new Table(t.getNumber(), t.getSeats(), t.getStatus())).toList())
         ).toList();
     }
 
@@ -65,7 +70,9 @@ public class SearchRestaurantService implements SearchRestaurantInterface {
                         restaurantModel.getPhoneNumber(),
                         restaurantModel.getDescription(),
                         restaurantModel.getCuisine(),
-                        restaurantModel.getOpeningHours())
+                        restaurantModel.getOpeningHours(),
+                        restaurantModel.getTables().stream()
+                        .map(t -> new Table(t.getNumber(), t.getSeats(), t.getStatus())).toList())
         ).toList();
     }
 }

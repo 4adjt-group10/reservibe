@@ -3,6 +3,7 @@ package com.reservibe.infra.model.restaurant;
 import com.reservibe.domain.entity.restaurant.Address;
 import com.reservibe.domain.entity.restaurant.OpeningHours;
 import com.reservibe.domain.enums.retaurant.Cuisine;
+import com.reservibe.infra.model.table.TableModel;
 import jakarta.persistence.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
@@ -27,14 +28,17 @@ public class RestaurantModel {
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(columnDefinition = "jsonb")
     private List<OpeningHours> openingHours;
+    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TableModel> tables;
 
     public RestaurantModel(UUID id,
-                      String name,
-                      Address address,
-                      String phoneNumber,
-                      String description,
-                      Cuisine cuisine,
-                      List<OpeningHours> openingHours) {
+                           String name,
+                           Address address,
+                           String phoneNumber,
+                           String description,
+                           Cuisine cuisine,
+                           List<OpeningHours> openingHours,
+                           List<TableModel> tables) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -44,6 +48,9 @@ public class RestaurantModel {
         if(!openingHours.isEmpty()){
             this.openingHours = openingHours;
         }
+        if(!tables.isEmpty()){
+            this.tables = tables;
+        }
     }
 
     public RestaurantModel(String name,
@@ -51,7 +58,8 @@ public class RestaurantModel {
                            String phoneNumber,
                            String description,
                            Cuisine cuisine,
-                           List<OpeningHours> openingHours) {
+                           List<OpeningHours> openingHours,
+                           List<TableModel> tables) {
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
@@ -59,6 +67,9 @@ public class RestaurantModel {
         this.cuisine = cuisine;
         if(!openingHours.isEmpty()){
             this.openingHours = openingHours;
+        }
+        if(!tables.isEmpty()){
+            this.tables = tables;
         }
     }
 
@@ -95,4 +106,7 @@ public class RestaurantModel {
         return openingHours;
     }
 
+    public List<TableModel> getTables() {
+        return tables;
+    }
 }

@@ -1,6 +1,7 @@
 package com.reservibe.infra.model.table;
 
 import com.reservibe.domain.enums.table.TableStatus;
+import com.reservibe.infra.model.restaurant.RestaurantModel;
 import jakarta.persistence.*;
 
 import java.util.UUID;
@@ -15,6 +16,9 @@ public class TableModel {
     private int seats;
     @Enumerated(EnumType.STRING)
     private TableStatus status;
+    @ManyToOne
+    @JoinColumn(name = "restaurant_id", nullable = false)
+    private RestaurantModel restaurant;
 
     public TableModel(Integer number, int seats, TableStatus status) {
         this.number = number;

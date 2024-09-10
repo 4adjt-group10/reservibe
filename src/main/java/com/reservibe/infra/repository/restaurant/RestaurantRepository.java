@@ -10,8 +10,9 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
-public interface RestaurantRepository extends JpaRepository<RestaurantModel, Long> {
+public interface RestaurantRepository extends JpaRepository<RestaurantModel, UUID> {
 
     Optional<RestaurantModel> findByName(String name);
 

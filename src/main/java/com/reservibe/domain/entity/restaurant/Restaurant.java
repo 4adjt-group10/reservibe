@@ -1,5 +1,6 @@
 package com.reservibe.domain.entity.restaurant;
 
+import com.reservibe.domain.entity.table.Table;
 import com.reservibe.domain.enums.retaurant.Cuisine;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ public class Restaurant {
     private String description;
     private Cuisine cuisine;
     private List<OpeningHours> openingHours;
+    private List<Table> tables;
 
     public Restaurant(UUID id,
                       String name,
@@ -22,7 +24,8 @@ public class Restaurant {
                       String phoneNumber,
                       String description,
                       Cuisine cuisine,
-                      List<OpeningHours> openingHours) {
+                      List<OpeningHours> openingHours,
+                      List<Table> tables) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -30,6 +33,7 @@ public class Restaurant {
         this.description = description;
         this.cuisine = cuisine;
         this.openingHours = openingHours;
+        this.tables = tables;
     }
 
     public Restaurant(String name,
@@ -37,13 +41,15 @@ public class Restaurant {
                       String phoneNumber,
                       String description,
                       Cuisine cuisine,
-                      List<OpeningHours> openingHours) {
+                      List<OpeningHours> openingHours,
+                      List<Table> tables) {
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.description = description;
         this.cuisine = cuisine;
         this.openingHours = openingHours;
+        this.tables = tables;
     }
 
     public Restaurant(String name,
@@ -57,6 +63,7 @@ public class Restaurant {
         this.description = description;
         this.cuisine = cuisine;
         this.openingHours = new ArrayList<>();
+        this.tables = new ArrayList<>();
     }
 
     public UUID getId() {
@@ -89,5 +96,9 @@ public class Restaurant {
 
     public List<OpeningHours> getOpeningHours() {
         return openingHours;
+    }
+
+    public List<Table> getTables() {
+        return tables;
     }
 }
