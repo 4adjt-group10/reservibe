@@ -10,7 +10,7 @@ public class Restaurant {
 
     private UUID id;
     private String name;
-    private String address;
+    private Address address;
     private String phoneNumber;
     private String description;
     private Cuisine cuisine;
@@ -18,7 +18,7 @@ public class Restaurant {
 
     public Restaurant(UUID id,
                       String name,
-                      String address,
+                      Address address,
                       String phoneNumber,
                       String description,
                       Cuisine cuisine,
@@ -33,7 +33,7 @@ public class Restaurant {
     }
 
     public Restaurant(String name,
-                      String address,
+                      Address address,
                       String phoneNumber,
                       String description,
                       Cuisine cuisine,
@@ -47,7 +47,7 @@ public class Restaurant {
     }
 
     public Restaurant(String name,
-                      String address,
+                      Address address,
                       String phoneNumber,
                       String description,
                       Cuisine cuisine) {
@@ -71,7 +71,7 @@ public class Restaurant {
         return name;
     }
 
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
 
