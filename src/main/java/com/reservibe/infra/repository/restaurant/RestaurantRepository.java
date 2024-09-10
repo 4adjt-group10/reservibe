@@ -25,7 +25,7 @@ public interface RestaurantRepository extends JpaRepository<RestaurantModel, Lon
     List<RestaurantModel> findAllByStartsAndEndHours(@Param("start") String start, @Param("end") String end);
 
     @Query(value = """
-        SELECT r.* FROM RestaurantModel r
+        SELECT r.* FROM restaurant_model r
         WHERE r.opening_hours @> cast(:openingHours as jsonb)
     """, nativeQuery = true)
     List<RestaurantModel> findAllByOpeningHours(@Param("openingHours") OpeningHours openingHours);
@@ -43,7 +43,7 @@ public interface RestaurantRepository extends JpaRepository<RestaurantModel, Lon
     List<RestaurantModel> findAllByAddress_City(@Param("city") String city);
 
     @Query(value = """
-        SELECT r.* FROM RestaurantModel r
+        SELECT r.* FROM restaurant_model r
         WHERE r.address @> cast(:address as jsonb)
     """, nativeQuery = true)
     List<RestaurantModel> findAllByAddress(@Param("address") Address address);
