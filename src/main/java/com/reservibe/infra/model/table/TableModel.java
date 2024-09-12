@@ -26,6 +26,13 @@ public class TableModel {
         this.status = status;
     }
 
+    public TableModel(Integer number, int seats, TableStatus status, RestaurantModel restaurant) {
+        this.number = number;
+        this.seats = seats;
+        this.status = status;
+        this.restaurant = restaurant;
+    }
+
     @Deprecated(since = "Only for framework use")
     public TableModel() {
     }
@@ -44,5 +51,9 @@ public class TableModel {
 
     public TableStatus getStatus() {
         return status;
+    }
+
+    public RestaurantModel getRestaurant() {
+        return restaurant;
     }
 }
