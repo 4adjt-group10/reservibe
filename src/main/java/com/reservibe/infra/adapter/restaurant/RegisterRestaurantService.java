@@ -5,13 +5,18 @@ import com.reservibe.domain.gateway.restaurant.RegisterRestaurantInterface;
 import com.reservibe.infra.model.restaurant.RestaurantModel;
 import com.reservibe.infra.model.table.TableModel;
 import com.reservibe.infra.repository.restaurant.RestaurantRepository;
+import com.reservibe.infra.repository.table.TableModelRepository;
+
+import java.util.List;
 
 public class RegisterRestaurantService implements RegisterRestaurantInterface {
 
     private final RestaurantRepository restaurantRepository;
+    private final TableModelRepository tableModelRepository;
 
-    public RegisterRestaurantService(RestaurantRepository restaurantRepository) {
+    public RegisterRestaurantService(RestaurantRepository restaurantRepository, TableModelRepository tableModelRepository) {
         this.restaurantRepository = restaurantRepository;
+        this.tableModelRepository = tableModelRepository;
     }
 
     @Override
@@ -22,11 +27,11 @@ public class RegisterRestaurantService implements RegisterRestaurantInterface {
                         restaurant.getPhoneNumber(),
                         restaurant.getDescription(),
                         restaurant.getCuisine(),
-                        restaurant.getOpeningHours(),
-                        restaurant.getTables().stream()
-                                .map(t -> new TableModel(t.getNumber(), t.getSeats(), t.getStatus())).toList()));
-
+                        restaurant.getOpeningHours()));
         restaurant.setId(restaurantModel.getId());
+        List<TableModel> tableModels = restaurant.getTables().stream()
+                .map(table -> new TableModel(table.getNumber(), table.getSeats(), table.getStatus(), restaurantModel)).toList();
+        tableModelRepository.saveAll(tableModels);
         return restaurant;
     }
 }

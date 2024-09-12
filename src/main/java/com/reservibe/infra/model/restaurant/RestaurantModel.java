@@ -58,8 +58,7 @@ public class RestaurantModel {
                            String phoneNumber,
                            String description,
                            Cuisine cuisine,
-                           List<OpeningHours> openingHours,
-                           List<TableModel> tables) {
+                           List<OpeningHours> openingHours) {
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
@@ -67,9 +66,6 @@ public class RestaurantModel {
         this.cuisine = cuisine;
         if(!openingHours.isEmpty()){
             this.openingHours = openingHours;
-        }
-        if(!tables.isEmpty()){
-            this.tables = tables;
         }
     }
 

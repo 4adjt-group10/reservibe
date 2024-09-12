@@ -24,19 +24,21 @@ public class ReservationModel {
     @JoinColumn(name = "reservation_id")
     private List<TableModel> tables;
     private String notesObservations;
-    @ManyToOne
-    private RestaurantModel restaurant;
 
     public ReservationModel() {}
 
-    public ReservationModel(UUID id, ClientModel client, ReservationStatus status, LocalDateTime reservationDate, List<TableModel> tables, String notesObservations, RestaurantModel restaurant) {
+    public ReservationModel(UUID id,
+                            ClientModel client,
+                            ReservationStatus status,
+                            LocalDateTime reservationDate,
+                            List<TableModel> tables,
+                            String notesObservations) {
         this.id = id;
         this.client = client;
         this.status = status;
         this.reservationDate = reservationDate;
         this.tables = tables;
         this.notesObservations = notesObservations;
-        this.restaurant = restaurant;
     }
 
     public UUID getId() {
@@ -63,8 +65,5 @@ public class ReservationModel {
         return notesObservations;
     }
 
-    public RestaurantModel getRestaurant() {
-        return restaurant;
-    }
 }
 
