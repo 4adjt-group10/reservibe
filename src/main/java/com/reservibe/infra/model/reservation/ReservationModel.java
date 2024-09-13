@@ -1,13 +1,16 @@
 package com.reservibe.infra.model.reservation;
 
+import com.reservibe.domain.entity.client.Client;
+import com.reservibe.domain.entity.restaurant.Restaurant;
+import com.reservibe.domain.entity.table.Table;
 import com.reservibe.domain.enums.reservation.ReservationStatus;
-import com.reservibe.infra.model.client.ClientModel;
 import com.reservibe.infra.model.restaurant.RestaurantModel;
 import com.reservibe.infra.model.table.TableModel;
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -15,29 +18,34 @@ public class ReservationModel {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    @ManyToOne
-    private ClientModel client;
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(columnDefinition = "jsonb")
+    private Client client;
     @Enumerated(EnumType.STRING)
     private ReservationStatus status;
     private LocalDateTime reservationDate;
-    @OneToMany
-    @JoinColumn(name = "reservation_id")
-    private List<TableModel> tables;
+    @ManyToOne()
+    @JoinColumn(name = "table_id")
+    private TableModel table;
     private String notesObservations;
 
     public ReservationModel() {}
 
-    public ReservationModel(UUID id,
-                            ClientModel client,
-                            ReservationStatus status,
-                            LocalDateTime reservationDate,
-                            List<TableModel> tables,
-                            String notesObservations) {
+    public ReservationModel(UUID id, Client client, ReservationStatus status, LocalDateTime reservationDate, TableModel table, String notesObservations) {
         this.id = id;
         this.client = client;
         this.status = status;
         this.reservationDate = reservationDate;
-        this.tables = tables;
+        this.table = table;
+        this.notesObservations = notesObservations;
+    }
+
+
+    public ReservationModel(Client client, ReservationStatus status, LocalDateTime reservationDate, TableModel table, String notesObservations) {
+        this.client = client;
+        this.status = status;
+        this.reservationDate = reservationDate;
+        this.table = table;
         this.notesObservations = notesObservations;
     }
 
@@ -45,7 +53,7 @@ public class ReservationModel {
         return id;
     }
 
-    public ClientModel getClient() {
+    public Client getClient() {
         return client;
     }
 
@@ -57,8 +65,8 @@ public class ReservationModel {
         return reservationDate;
     }
 
-    public List<TableModel> getTables() {
-        return tables;
+    public TableModel getTables() {
+        return table;
     }
 
     public String getNotesObservations() {

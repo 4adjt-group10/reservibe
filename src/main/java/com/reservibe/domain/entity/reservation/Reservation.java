@@ -4,6 +4,8 @@ import com.reservibe.domain.entity.client.Client;
 import com.reservibe.domain.entity.restaurant.Restaurant;
 import com.reservibe.domain.entity.table.Table;
 import com.reservibe.domain.enums.reservation.ReservationStatus;
+import com.reservibe.domain.input.reservation.CreateReservationInput;
+import com.reservibe.infra.model.table.TableModel;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,22 +17,29 @@ public class Reservation {
     private Client client;
     private ReservationStatus status;
     private LocalDateTime reservationDate;
-    private List<Table> tables;
+    private TableModel table;
     private String notesObservations;
-    private Restaurant restaurant;
 
-    public Reservation(UUID id, Client client, ReservationStatus status, LocalDateTime reservationDate, List<Table> tables, String notesObservations, Restaurant restaurant) {
+    public Reservation(UUID id, Client client, ReservationStatus status, LocalDateTime reservationDate, TableModel table, String notesObservations) {
         this.id = id;
         this.client = client;
         this.status = status;
         this.reservationDate = reservationDate;
-        this.tables = tables;
+        this.table = table;
         this.notesObservations = notesObservations;
-        this.restaurant = restaurant;
     }
 
     @Deprecated(since = "Only for framework use")
     public Reservation() {}
+
+    public Reservation(Client client, ReservationStatus status, LocalDateTime reservationDate, TableModel table, String notesObservations) {
+
+        this.client = client;
+        this.status = status;
+        this.reservationDate = reservationDate;
+        this.table = table;
+        this.notesObservations = notesObservations;
+    }
 
     public UUID getId() {
         return id;
@@ -48,15 +57,12 @@ public class Reservation {
         return reservationDate;
     }
 
-    public List<Table> getTables() {
-        return tables;
+    public TableModel getTables() {
+        return table;
     }
 
     public String getNotesObservations() {
         return notesObservations;
     }
 
-    public Restaurant getRestaurant() {
-        return restaurant;
-    }
 }
