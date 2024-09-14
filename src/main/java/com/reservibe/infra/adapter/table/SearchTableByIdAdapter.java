@@ -1,7 +1,7 @@
 package com.reservibe.infra.adapter.table;
 
+import com.reservibe.domain.entity.table.Table;
 import com.reservibe.domain.enums.table.TableStatus;
-import com.reservibe.infra.model.table.TableModel;
 import com.reservibe.infra.repository.table.TableModelRepository;
 import jakarta.persistence.EntityNotFoundException;
 
@@ -14,9 +14,10 @@ public class SearchTableByIdAdapter {
         this.tableModelRepository = tableModelRepository;
     }
 
-    public TableModel getTableByIdAndStatusIsFree(UUID id) {
-        return tableModelRepository.findByIdAndStatus(id, TableStatus.FREE)
+    public Table getTableByIdAndStatusIsFree(UUID id) {
+       var tableModel =  tableModelRepository.findByIdAndStatus(id, TableStatus.FREE)
                 .orElseThrow(()->new EntityNotFoundException("Table not Available"));
+        return new Table(tableModel.getId(),tableModel.getNumber(),tableModel.getSeats(),tableModel.getStatus());
     }
 }
 

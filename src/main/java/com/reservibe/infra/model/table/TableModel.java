@@ -36,6 +36,13 @@ public class TableModel {
         this.restaurant = restaurant;
     }
 
+    public TableModel(UUID id, Integer number, int seats, TableStatus status) {
+        this.id = id;
+        this.number = number;
+        this.seats = seats;
+        this.status = status;
+    }
+
     @Deprecated(since = "Only for framework use")
     public TableModel() {
     }

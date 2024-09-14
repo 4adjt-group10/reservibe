@@ -54,4 +54,8 @@ public class Table {
     public Restaurant getRestaurant() {
         return restaurant;
     }
+
+    public void setStatus(TableStatus tableStatus) {
+        this.status = tableStatus;
+    }
 }

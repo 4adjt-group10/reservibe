@@ -14,6 +14,7 @@ import java.util.UUID;
 public class ReservationModel {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(columnDefinition = "jsonb")
@@ -25,6 +26,7 @@ public class ReservationModel {
     @JoinColumn(name = "table_id")
     private TableModel table;
     private String notesObservations;
+
 
     public ReservationModel() {}
 
@@ -71,7 +73,7 @@ public class ReservationModel {
         return reservationDate;
     }
 
-    public TableModel getTables() {
+    public TableModel getTable() {
         return table;
     }
 
@@ -79,5 +81,20 @@ public class ReservationModel {
         return notesObservations;
     }
 
+    public void setTable(TableModel tableModel) {
+        this.table = tableModel;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public void setStatus(ReservationStatus status) {
+        this.status = status;
+    }
 }
 
