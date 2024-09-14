@@ -4,7 +4,6 @@ import com.reservibe.domain.input.reservation.ReservationManagementInput;
 import com.reservibe.domain.usecase.reservation.ManagementReservationUsecase;
 import com.reservibe.infra.adapter.reservation.ManagementReservationAdapter;
 import com.reservibe.infra.repository.reservation.ReservationRepository;
-import com.reservibe.infra.repository.table.TableModelRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;

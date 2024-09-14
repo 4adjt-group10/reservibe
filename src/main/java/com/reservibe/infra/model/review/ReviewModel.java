@@ -13,6 +13,7 @@ import java.util.UUID;
 public class ReviewModel {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
     @ManyToOne
     private RestaurantModel restaurant;
