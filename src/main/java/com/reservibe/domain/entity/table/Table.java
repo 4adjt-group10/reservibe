@@ -1,10 +1,11 @@
 package com.reservibe.domain.entity.table;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.reservibe.domain.entity.restaurant.Restaurant;
 import com.reservibe.domain.enums.table.TableStatus;
 
 import java.util.UUID;
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Table {
 
     private UUID id;
@@ -22,6 +23,13 @@ public class Table {
     }
 
     public Table(Integer number, int seats, TableStatus status) {
+        this.number = number;
+        this.seats = seats;
+        this.status = status;
+    }
+
+    public Table(UUID id, Integer number, int seats, TableStatus status) {
+        this.id = id;
         this.number = number;
         this.seats = seats;
         this.status = status;

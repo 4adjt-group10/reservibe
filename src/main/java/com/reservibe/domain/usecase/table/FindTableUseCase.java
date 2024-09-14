@@ -1,13 +1,12 @@
 package com.reservibe.domain.usecase.table;
 
-import com.reservibe.infra.adapter.restaurant.SearchRestaurantService;
-import com.reservibe.infra.adapter.table.SearchTableServiceById;
+import com.reservibe.infra.adapter.table.SearchTableByIdAdapter;
 
 public class FindTableUseCase {
-    private final SearchTableServiceById searchTableServiceById;
+    private final SearchTableByIdAdapter searchTableByIdAdapter;
 
 
-    public FindTableUseCase(SearchTableServiceById searchTableServiceById) {
-        this.searchTableServiceById = searchTableServiceById;
+    public FindTableUseCase(SearchTableByIdAdapter searchTableByIdAdapter) {
+        this.searchTableByIdAdapter = searchTableByIdAdapter;
     }
 }

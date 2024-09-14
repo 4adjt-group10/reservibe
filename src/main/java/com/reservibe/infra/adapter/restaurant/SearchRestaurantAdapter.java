@@ -10,11 +10,11 @@ import jakarta.persistence.EntityNotFoundException;
 
 import java.util.List;
 
-public class SearchRestaurantService implements SearchRestaurantInterface {
+public class SearchRestaurantAdapter implements SearchRestaurantInterface {
 
     private final RestaurantRepository restaurantRepository;
 
-    public SearchRestaurantService(RestaurantRepository restaurantRepository) {
+    public SearchRestaurantAdapter(RestaurantRepository restaurantRepository) {
         this.restaurantRepository = restaurantRepository;
     }
     //TODO: Dividir métodos em adapters específicos?
@@ -28,7 +28,7 @@ public class SearchRestaurantService implements SearchRestaurantInterface {
                         restaurantModel.getDescription(),
                         restaurantModel.getCuisine(),
                         restaurantModel.getOpeningHours(), restaurantModel.getTables().stream()
-                        .map(t -> new Table(t.getNumber(), t.getSeats(), t.getStatus())).toList())
+                        .map(t -> new Table(t.getId(),t.getNumber(), t.getSeats(), t.getStatus())).toList())
         ).orElseThrow(() -> new EntityNotFoundException("Restaurant not found"));
     }
 

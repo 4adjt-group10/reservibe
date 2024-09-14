@@ -20,7 +20,8 @@ Criar um sistema de Reserva e Avaliação de Restaurantes.
    nome, localização ou tipo de cozinha.
 5. Gerenciamento de Reservas: Os restaurantes podem gerenciar as
    reservas, visualizando e atualizando o status das mesas.
-   O que será avaliado
+
+##   O que será avaliado
 ### Clean Architecture:
 1. Design Arquitetônico: Estruturar o backend de acordo com a Clean
    Architecture, definindo entidades, regras de negócio, adaptadores de

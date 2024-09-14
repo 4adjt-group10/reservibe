@@ -26,7 +26,10 @@ public class TableModel {
         this.status = status;
     }
 
-    public TableModel(Integer number, int seats, TableStatus status, RestaurantModel restaurant) {
+    public TableModel(Integer number,
+                      int seats,
+                      TableStatus status,
+                      RestaurantModel restaurant) {
         this.number = number;
         this.seats = seats;
         this.status = status;
@@ -55,5 +58,9 @@ public class TableModel {
 
     public RestaurantModel getRestaurant() {
         return restaurant;
+    }
+
+    public void setStatus(TableStatus tableStatus) {
+        this.status = tableStatus;
     }
 }

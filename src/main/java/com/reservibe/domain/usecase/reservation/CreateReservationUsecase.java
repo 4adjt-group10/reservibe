@@ -1,24 +1,28 @@
 package com.reservibe.domain.usecase.reservation;
 
 import com.reservibe.domain.entity.reservation.Reservation;
+import com.reservibe.domain.enums.reservation.ReservationStatus;
+import com.reservibe.domain.enums.table.TableStatus;
 import com.reservibe.domain.input.reservation.CreateReservationInput;
-import com.reservibe.infra.adapter.reservation.CreateReservationService;
-import com.reservibe.infra.adapter.table.SearchTableServiceById;
+import com.reservibe.infra.adapter.reservation.CreateReservationAdapter;
+import com.reservibe.infra.adapter.table.SearchTableByIdAdapter;
 
 public class CreateReservationUsecase {
-    private final CreateReservationService createReservationService;
-    private final SearchTableServiceById searchTableServiceById;
-    public CreateReservationUsecase(CreateReservationService createReservationService, SearchTableServiceById searchTableServiceById) {
-        this.createReservationService = createReservationService;
-        this.searchTableServiceById = searchTableServiceById;
+    private final CreateReservationAdapter createReservationAdapter;
+    private final SearchTableByIdAdapter searchTableByIdAdapter;
+    public CreateReservationUsecase(CreateReservationAdapter createReservationAdapter, SearchTableByIdAdapter searchTableByIdAdapter) {
+        this.createReservationAdapter = createReservationAdapter;
+        this.searchTableByIdAdapter = searchTableByIdAdapter;
     }
 
     public void execute(CreateReservationInput reservation) {
+        var table = searchTableByIdAdapter.getTableByIdAndStatusIsFree(reservation.tableID());
+        table.setStatus(TableStatus.RESERVED);
         var reserv = new Reservation(reservation.client(),
-                reservation.status(),reservation.reservationDate(),
-                searchTableServiceById.getTable(reservation.table().getId())
+                ReservationStatus.CONFIRMED,reservation.reservationDate(),
+                table
                 ,reservation.notesObservations());
-        createReservationService.createReservation(reserv);
+        createReservationAdapter.createReservation(reserv);
 
     }
 }

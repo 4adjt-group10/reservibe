@@ -6,7 +6,7 @@ import com.reservibe.domain.enums.retaurant.Cuisine;
 import com.reservibe.domain.output.restaurant.RestaurantListOutput;
 import com.reservibe.domain.presenters.restaurant.RestaurantListPresenter;
 import com.reservibe.domain.usecase.restaurant.search.SearchRestaurantByCuisineUseCase;
-import com.reservibe.infra.adapter.restaurant.SearchRestaurantService;
+import com.reservibe.infra.adapter.restaurant.SearchRestaurantAdapter;
 import com.reservibe.infra.repository.restaurant.RestaurantRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +26,7 @@ public class SearchRestaurantByCuisineController {
 
     @GetMapping("/{cuisine}")
     public ResponseEntity<Object> searchRestaurantByName(@PathVariable Cuisine cuisine) {
-        SearchRestaurantByCuisineUseCase searchRestaurantByCuisineUseCase = new SearchRestaurantByCuisineUseCase(new SearchRestaurantService(restaurantRepository));
+        SearchRestaurantByCuisineUseCase searchRestaurantByCuisineUseCase = new SearchRestaurantByCuisineUseCase(new SearchRestaurantAdapter(restaurantRepository));
         RestaurantListOutput listOutput = searchRestaurantByCuisineUseCase.execute(cuisine);
         if (listOutput.getOutputStatus().getCode() != 200) {
             return new GenericResponse().response(listOutput);

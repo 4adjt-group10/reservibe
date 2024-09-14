@@ -1,10 +1,7 @@
 package com.reservibe.infra.model.reservation;
 
 import com.reservibe.domain.entity.client.Client;
-import com.reservibe.domain.entity.restaurant.Restaurant;
-import com.reservibe.domain.entity.table.Table;
 import com.reservibe.domain.enums.reservation.ReservationStatus;
-import com.reservibe.infra.model.restaurant.RestaurantModel;
 import com.reservibe.infra.model.table.TableModel;
 import jakarta.persistence.*;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -31,7 +28,12 @@ public class ReservationModel {
 
     public ReservationModel() {}
 
-    public ReservationModel(UUID id, Client client, ReservationStatus status, LocalDateTime reservationDate, TableModel table, String notesObservations) {
+    public ReservationModel(UUID id,
+                            Client client,
+                            ReservationStatus status,
+                            LocalDateTime reservationDate,
+                            TableModel table,
+                            String notesObservations) {
         this.id = id;
         this.client = client;
         this.status = status;
@@ -41,7 +43,11 @@ public class ReservationModel {
     }
 
 
-    public ReservationModel(Client client, ReservationStatus status, LocalDateTime reservationDate, TableModel table, String notesObservations) {
+    public ReservationModel(Client client,
+                            ReservationStatus status,
+                            LocalDateTime reservationDate,
+                            TableModel table,
+                            String notesObservations) {
         this.client = client;
         this.status = status;
         this.reservationDate = reservationDate;

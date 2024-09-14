@@ -5,7 +5,7 @@ import com.reservibe.application.response.PresenterResponse;
 import com.reservibe.domain.output.restaurant.RestaurantListOutput;
 import com.reservibe.domain.presenters.restaurant.RestaurantListPresenter;
 import com.reservibe.domain.usecase.restaurant.search.SearchRestaurantByCityUseCase;
-import com.reservibe.infra.adapter.restaurant.SearchRestaurantService;
+import com.reservibe.infra.adapter.restaurant.SearchRestaurantAdapter;
 import com.reservibe.infra.repository.restaurant.RestaurantRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +25,7 @@ public class SearchRestaurantByCityController {
 
     @GetMapping("/{city}")
     public ResponseEntity<Object> searchRestaurantByName(@PathVariable String city) {
-        SearchRestaurantByCityUseCase searchRestaurantByCityUseCase = new SearchRestaurantByCityUseCase(new SearchRestaurantService(restaurantRepository));
+        SearchRestaurantByCityUseCase searchRestaurantByCityUseCase = new SearchRestaurantByCityUseCase(new SearchRestaurantAdapter(restaurantRepository));
         RestaurantListOutput output = searchRestaurantByCityUseCase.execute(city);
         if (output.getOutputStatus().getCode() != 200) {
             return new GenericResponse().response(output);

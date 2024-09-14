@@ -26,7 +26,12 @@ public class ReviewModel {
 
     public ReviewModel() {}
 
-    public ReviewModel(UUID id, RestaurantModel restaurant, Client client, ReviewStars reviewStars, LocalDateTime reviewDate, String comment) {
+    public ReviewModel(UUID id,
+                       RestaurantModel restaurant,
+                       Client client,
+                       ReviewStars reviewStars,
+                       LocalDateTime reviewDate,
+                       String comment) {
         this.id = id;
         this.restaurant = restaurant;
         this.client = client;
