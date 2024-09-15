@@ -3,6 +3,7 @@ package com.reservibe.application.controller.reservation.register;
 import com.reservibe.domain.input.reservation.CreateReservationInput;
 import com.reservibe.domain.usecase.reservation.CreateReservationUsecase;
 import com.reservibe.infra.adapter.reservation.CreateReservationAdapter;
+import com.reservibe.infra.adapter.table.UpdateTableAdapter;
 import com.reservibe.infra.adapter.table.SearchTableByIdAdapter;
 import com.reservibe.infra.repository.reservation.ReservationRepository;
 import com.reservibe.infra.repository.table.TableModelRepository;
@@ -25,7 +26,8 @@ public class ReservationRegisterController {
     public void createReservation(@RequestBody CreateReservationInput reservation) {
         CreateReservationUsecase createReservationUsecase = new
                 CreateReservationUsecase(new CreateReservationAdapter(reservationRepository),
-                new SearchTableByIdAdapter(tableModelRepository));
+                new SearchTableByIdAdapter(tableModelRepository),
+                new UpdateTableAdapter(tableModelRepository));
         createReservationUsecase.execute(reservation);
     }
 }

@@ -10,6 +10,8 @@ import jakarta.persistence.EntityNotFoundException;
 
 import java.util.List;
 
+import static com.reservibe.domain.enums.table.TableStatus.FREE;
+
 public class SearchRestaurantAdapter implements SearchRestaurantInterface {
 
     private final RestaurantRepository restaurantRepository;
@@ -28,6 +30,7 @@ public class SearchRestaurantAdapter implements SearchRestaurantInterface {
                         restaurantModel.getDescription(),
                         restaurantModel.getCuisine(),
                         restaurantModel.getOpeningHours(), restaurantModel.getTables().stream()
+                        .filter(t -> t.getStatus().equals(FREE))
                         .map(t -> new Table(t.getId(),t.getNumber(), t.getSeats(), t.getStatus())).toList())
         ).orElseThrow(() -> new EntityNotFoundException("Restaurant not found"));
     }
@@ -42,6 +45,7 @@ public class SearchRestaurantAdapter implements SearchRestaurantInterface {
                         restaurantModel.getDescription(),
                         restaurantModel.getCuisine(),
                         restaurantModel.getOpeningHours(), restaurantModel.getTables().stream()
+                        .filter(t -> t.getStatus().equals(FREE))
                         .map(t -> new Table(t.getNumber(), t.getSeats(), t.getStatus())).toList())
         ).toList();
     }
@@ -57,6 +61,7 @@ public class SearchRestaurantAdapter implements SearchRestaurantInterface {
                         restaurantModel.getCuisine(),
                         restaurantModel.getOpeningHours(),
                         restaurantModel.getTables().stream()
+                                .filter(t -> t.getStatus().equals(FREE))
                         .map(t -> new Table(t.getNumber(), t.getSeats(), t.getStatus())).toList())
         ).toList();
     }
@@ -72,6 +77,7 @@ public class SearchRestaurantAdapter implements SearchRestaurantInterface {
                         restaurantModel.getCuisine(),
                         restaurantModel.getOpeningHours(),
                         restaurantModel.getTables().stream()
+                                .filter(t -> t.getStatus().equals(FREE))
                         .map(t -> new Table(t.getNumber(), t.getSeats(), t.getStatus())).toList())
         ).toList();
     }

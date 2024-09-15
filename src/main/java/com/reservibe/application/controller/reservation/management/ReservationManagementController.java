@@ -22,6 +22,5 @@ public class ReservationManagementController {
                                   @RequestBody ReservationManagementInput reservation) {
         ManagementReservationUsecase managementReservationUsecase = new  ManagementReservationUsecase(new ManagementReservationAdapter(reservationRepository));
         managementReservationUsecase.execute(id,reservation);
-
     }
 }

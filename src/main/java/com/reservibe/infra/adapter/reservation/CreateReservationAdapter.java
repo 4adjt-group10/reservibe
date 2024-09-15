@@ -7,6 +7,7 @@ import com.reservibe.infra.model.table.TableModel;
 import com.reservibe.infra.repository.reservation.ReservationRepository;
 
 public class CreateReservationAdapter {
+
     private final ReservationRepository reservationRepository;
 
     public CreateReservationAdapter(ReservationRepository reservationRepository) {
