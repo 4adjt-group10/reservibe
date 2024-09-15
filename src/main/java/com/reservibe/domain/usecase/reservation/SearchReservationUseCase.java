@@ -2,7 +2,6 @@ package com.reservibe.domain.usecase.reservation;
 
 import com.reservibe.domain.generic.output.OutputStatus;
 import com.reservibe.domain.output.reservation.ReservationListOutput;
-import com.reservibe.domain.output.reservation.ReservationOutput;
 import com.reservibe.infra.adapter.reservation.SearchReservationAdapter;
 
 import java.util.UUID;

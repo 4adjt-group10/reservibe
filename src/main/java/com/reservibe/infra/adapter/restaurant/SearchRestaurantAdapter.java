@@ -4,7 +4,6 @@ import com.reservibe.domain.entity.restaurant.Address;
 import com.reservibe.domain.entity.restaurant.Restaurant;
 import com.reservibe.domain.entity.table.Table;
 import com.reservibe.domain.enums.retaurant.Cuisine;
-import com.reservibe.domain.enums.table.TableStatus;
 import com.reservibe.domain.gateway.restaurant.SearchRestaurantInterface;
 import com.reservibe.infra.repository.restaurant.RestaurantRepository;
 import jakarta.persistence.EntityNotFoundException;
