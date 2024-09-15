@@ -41,6 +41,14 @@ public class ReviewModel {
         this.comment = comment;
     }
 
+    public ReviewModel(RestaurantModel restaurant, Client client, ReviewStars reviewStars, LocalDateTime reviewDate, String comment) {
+        this.restaurant = restaurant;
+        this.client = client;
+        this.reviewStars = reviewStars;
+        this.reviewDate = reviewDate;
+        this.comment = comment;
+    }
+
     public UUID getId() {
         return id;
     }

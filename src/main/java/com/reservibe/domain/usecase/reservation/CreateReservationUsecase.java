@@ -24,7 +24,7 @@ public class CreateReservationUsecase {
     public void execute(CreateReservationInput input) {
         var table = searchTableByIdAdapter.getTableByIdAndStatusIsFree(input.tableID());
         var reserv = new Reservation(input.client(),
-                ReservationStatus.CONFIRMED,
+                ReservationStatus.PENDING,
                 input.reservationDate(),
                 table,
                 input.notesObservations());

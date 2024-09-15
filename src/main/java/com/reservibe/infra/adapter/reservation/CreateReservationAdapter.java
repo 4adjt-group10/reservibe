@@ -22,7 +22,7 @@ public class CreateReservationAdapter {
                 reservation.getTable().getStatus());
 
         this.reservationRepository.save(new ReservationModel(reservation.getClient(),
-                ReservationStatus.CONFIRMED,
+                ReservationStatus.PENDING,
                 reservation.getReservationDate(),
                 tableModel,
                 reservation.getNotesObservations()));

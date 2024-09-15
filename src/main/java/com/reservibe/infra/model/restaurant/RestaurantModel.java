@@ -70,6 +70,22 @@ public class RestaurantModel {
         }
     }
 
+    public RestaurantModel(UUID id,
+                           String name,
+                           Address address,
+                           String phoneNumber,
+                           String description,
+                           Cuisine cuisine,
+                           List<OpeningHours> openingHours) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.description = description;
+        this.cuisine = cuisine;
+        this.openingHours = openingHours;
+    }
+
     @Deprecated(since = "Only for framework use")
     public RestaurantModel() {
 
