@@ -6,7 +6,7 @@ import com.reservibe.domain.entity.restaurant.Address;
 import com.reservibe.domain.output.restaurant.RestaurantListOutput;
 import com.reservibe.domain.presenters.restaurant.RestaurantListPresenter;
 import com.reservibe.domain.usecase.restaurant.search.SearchRestaurantByAddressUseCase;
-import com.reservibe.infra.adapter.restaurant.SearchRestaurantService;
+import com.reservibe.infra.adapter.restaurant.SearchRestaurantAdapter;
 import com.reservibe.infra.repository.restaurant.RestaurantRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +26,7 @@ public class SearchRestaurantByAddressController {
 
     @PostMapping
     public ResponseEntity<Object> searchRestaurantByAddress(@RequestBody Address address) {
-        SearchRestaurantByAddressUseCase searchRestaurantByAddressUseCase = new SearchRestaurantByAddressUseCase(new SearchRestaurantService(restaurantRepository));
+        SearchRestaurantByAddressUseCase searchRestaurantByAddressUseCase = new SearchRestaurantByAddressUseCase(new SearchRestaurantAdapter(restaurantRepository));
         RestaurantListOutput output = searchRestaurantByAddressUseCase.execute(address);
         if (output.getOutputStatus().getCode() != 200) {
             return new GenericResponse().response(output);

@@ -1,0 +1,31 @@
+package com.reservibe.application.controller.reservation.register;
+
+import com.reservibe.domain.input.reservation.CreateReservationInput;
+import com.reservibe.domain.usecase.reservation.CreateReservationUsecase;
+import com.reservibe.infra.adapter.reservation.CreateReservationAdapter;
+import com.reservibe.infra.adapter.table.SearchTableByIdAdapter;
+import com.reservibe.infra.repository.reservation.ReservationRepository;
+import com.reservibe.infra.repository.table.TableModelRepository;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/reservation/create")
+public class ReservationRegisterController {
+    private final ReservationRepository reservationRepository;
+    private final TableModelRepository  tableModelRepository;
+    public ReservationRegisterController(ReservationRepository reservationRepository, TableModelRepository tableModelRepository) {
+        this.reservationRepository = reservationRepository;
+        this.tableModelRepository = tableModelRepository;
+    }
+
+    @PostMapping()
+    public void createReservation(@RequestBody CreateReservationInput reservation) {
+        CreateReservationUsecase createReservationUsecase = new
+                CreateReservationUsecase(new CreateReservationAdapter(reservationRepository),
+                new SearchTableByIdAdapter(tableModelRepository));
+        createReservationUsecase.execute(reservation);
+    }
+}

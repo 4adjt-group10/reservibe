@@ -9,12 +9,12 @@ import com.reservibe.infra.repository.table.TableModelRepository;
 
 import java.util.List;
 
-public class RegisterRestaurantService implements RegisterRestaurantInterface {
+public class RegisterRestaurantAdapter implements RegisterRestaurantInterface {
 
     private final RestaurantRepository restaurantRepository;
     private final TableModelRepository tableModelRepository;
 
-    public RegisterRestaurantService(RestaurantRepository restaurantRepository, TableModelRepository tableModelRepository) {
+    public RegisterRestaurantAdapter(RestaurantRepository restaurantRepository, TableModelRepository tableModelRepository) {
         this.restaurantRepository = restaurantRepository;
         this.tableModelRepository = tableModelRepository;
     }
