@@ -5,12 +5,11 @@ import org.hibernate.validator.constraints.br.CPF;
 
 public class Client {
 
-
     private String name;
     private String email;
     private String phone;
     private String cpf;
-
+    //TODO: Validar dessa forma em todas as entidades em vez dos inputs
     public Client(String name, @Email String email, String phone, @CPF String cpf) {
         this.name = name;
         this.email = email;

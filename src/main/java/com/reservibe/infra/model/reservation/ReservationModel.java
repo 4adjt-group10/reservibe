@@ -57,6 +57,10 @@ public class ReservationModel {
         this.notesObservations = notesObservations;
     }
 
+    public ReservationModel(UUID id) {
+        this.id = id;
+    }
+
     public UUID getId() {
         return id;
     }

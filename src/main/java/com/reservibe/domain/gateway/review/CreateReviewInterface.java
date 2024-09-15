@@ -1,5 +1,8 @@
 package com.reservibe.domain.gateway.review;
 
+import com.reservibe.domain.entity.review.Review;
+
 public interface CreateReviewInterface {
-    Object createReview();
+
+    Review createReview(Review review);
 }

@@ -2,6 +2,7 @@ package com.reservibe.infra.model.review;
 
 import com.reservibe.domain.entity.client.Client;
 import com.reservibe.domain.enums.review.ReviewStars;
+import com.reservibe.infra.model.reservation.ReservationModel;
 import com.reservibe.infra.model.restaurant.RestaurantModel;
 import jakarta.persistence.*;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -18,8 +19,8 @@ public class ReviewModel {
     @ManyToOne
     private RestaurantModel restaurant;
     @JdbcTypeCode(SqlTypes.JSON)
-    @Column(columnDefinition = "jsonb")
-    private Client client;
+    @ManyToOne
+    private ReservationModel reservation;
     @Enumerated(EnumType.STRING)
     private ReviewStars reviewStars;
     private LocalDateTime reviewDate;
@@ -35,10 +36,21 @@ public class ReviewModel {
                        String comment) {
         this.id = id;
         this.restaurant = restaurant;
-        this.client = client;
         this.reviewStars = reviewStars;
         this.reviewDate = reviewDate;
         this.comment = comment;
+    }
+
+    public ReviewModel(RestaurantModel restaurant,
+                       ReviewStars reviewStars,
+                       LocalDateTime reviewDate,
+                       String comment,
+                       ReservationModel reservation) {
+        this.restaurant = restaurant;
+        this.reviewStars = reviewStars;
+        this.reviewDate = reviewDate;
+        this.comment = comment;
+        this.reservation = reservation;
     }
 
     public UUID getId() {
@@ -47,10 +59,6 @@ public class ReviewModel {
 
     public RestaurantModel getRestaurant() {
         return restaurant;
-    }
-
-    public Client getClient() {
-        return client;
     }
 
     public ReviewStars getReviewStars() {
@@ -63,6 +71,10 @@ public class ReviewModel {
 
     public String getComment() {
         return comment;
+    }
+
+    public ReservationModel getReservation() {
+        return reservation;
     }
 }
 

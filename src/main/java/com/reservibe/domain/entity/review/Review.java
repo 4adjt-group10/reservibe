@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class Review {
+
     private UUID id;
     private Restaurant restaurant;
     private Client client;
@@ -21,6 +22,20 @@ public class Review {
         this.client = client;
         this.reviewStars = reviewStars;
         this.reviewDate = reviewDate;
+        this.comment = comment;
+    }
+
+    public Review(Restaurant restaurant, Client client, ReviewStars reviewStars, LocalDateTime reviewDate, String comment) {
+        this.restaurant = restaurant;
+        this.client = client;
+        this.reviewStars = reviewStars;
+        this.reviewDate = reviewDate;
+        this.comment = comment;
+    }
+
+    public Review(Client client, ReviewStars reviewStars, String comment) {
+        this.client = client;
+        this.reviewStars = reviewStars;
         this.comment = comment;
     }
 
@@ -49,5 +64,9 @@ public class Review {
 
     public String getComment() {
         return comment;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 }
