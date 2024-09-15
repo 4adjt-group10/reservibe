@@ -35,9 +35,7 @@ public class ManagementReservationAdapter {
     }
 
     public void updateReserver(Reservation reserv) {
-        if(ReservationStatus.FINISH.equals(reserv.getStatus())){
-            reserv.getTable().setStatus(TableStatus.FREE);
-        }
+
         var tableModel = new TableModel(reserv.getTable().getId(),
                 reserv.getTable().getNumber(),
                 reserv.getTable().getSeats(),
