@@ -2,10 +2,13 @@ package com.reservibe.domain.entity.restaurant;
 
 import com.reservibe.domain.entity.table.Table;
 import com.reservibe.domain.enums.retaurant.Cuisine;
+import com.reservibe.domain.enums.table.TableStatus;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import static com.reservibe.domain.enums.table.TableStatus.*;
 
 public class Restaurant {
 
@@ -100,5 +103,11 @@ public class Restaurant {
 
     public List<Table> getTables() {
         return tables;
+    }
+
+    public List<Table> getFreeTables() {
+        List<Table> freeTables = new ArrayList<>();
+        this.tables.stream().filter(table -> table.getStatus().equals(FREE)).forEach(freeTables::add);
+        return freeTables;
     }
 }

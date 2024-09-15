@@ -23,6 +23,5 @@ public class CreateReservationUsecase {
                 table
                 ,reservation.notesObservations());
         createReservationAdapter.createReservation(reserv);
-
     }
 }

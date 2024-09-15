@@ -4,11 +4,14 @@ import com.reservibe.domain.entity.restaurant.Address;
 import com.reservibe.domain.entity.restaurant.Restaurant;
 import com.reservibe.domain.entity.table.Table;
 import com.reservibe.domain.enums.retaurant.Cuisine;
+import com.reservibe.domain.enums.table.TableStatus;
 import com.reservibe.domain.gateway.restaurant.SearchRestaurantInterface;
 import com.reservibe.infra.repository.restaurant.RestaurantRepository;
 import jakarta.persistence.EntityNotFoundException;
 
 import java.util.List;
+
+import static com.reservibe.domain.enums.table.TableStatus.FREE;
 
 public class SearchRestaurantAdapter implements SearchRestaurantInterface {
 
@@ -28,6 +31,7 @@ public class SearchRestaurantAdapter implements SearchRestaurantInterface {
                         restaurantModel.getDescription(),
                         restaurantModel.getCuisine(),
                         restaurantModel.getOpeningHours(), restaurantModel.getTables().stream()
+                        .filter(t -> t.getStatus().equals(FREE))
                         .map(t -> new Table(t.getId(),t.getNumber(), t.getSeats(), t.getStatus())).toList())
         ).orElseThrow(() -> new EntityNotFoundException("Restaurant not found"));
     }
@@ -42,6 +46,7 @@ public class SearchRestaurantAdapter implements SearchRestaurantInterface {
                         restaurantModel.getDescription(),
                         restaurantModel.getCuisine(),
                         restaurantModel.getOpeningHours(), restaurantModel.getTables().stream()
+                        .filter(t -> t.getStatus().equals(FREE))
                         .map(t -> new Table(t.getNumber(), t.getSeats(), t.getStatus())).toList())
         ).toList();
     }
@@ -57,6 +62,7 @@ public class SearchRestaurantAdapter implements SearchRestaurantInterface {
                         restaurantModel.getCuisine(),
                         restaurantModel.getOpeningHours(),
                         restaurantModel.getTables().stream()
+                                .filter(t -> t.getStatus().equals(FREE))
                         .map(t -> new Table(t.getNumber(), t.getSeats(), t.getStatus())).toList())
         ).toList();
     }
@@ -72,6 +78,7 @@ public class SearchRestaurantAdapter implements SearchRestaurantInterface {
                         restaurantModel.getCuisine(),
                         restaurantModel.getOpeningHours(),
                         restaurantModel.getTables().stream()
+                                .filter(t -> t.getStatus().equals(FREE))
                         .map(t -> new Table(t.getNumber(), t.getSeats(), t.getStatus())).toList())
         ).toList();
     }
