@@ -2,7 +2,6 @@ package com.reservibe.domain.usecase.review;
 
 import com.reservibe.domain.entity.review.Review;
 import com.reservibe.domain.input.review.ReviewInput;
-import com.reservibe.infra.adapter.reservation.SearchReservationAdapter;
 import com.reservibe.infra.adapter.review.CreateReviewAdapter;
 
 public class RegisterReviewUseCase {

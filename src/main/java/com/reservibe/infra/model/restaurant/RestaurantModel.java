@@ -86,6 +86,10 @@ public class RestaurantModel {
         this.openingHours = openingHours;
     }
 
+    public RestaurantModel(UUID id) {
+        this.id = id;
+    }
+
     @Deprecated(since = "Only for framework use")
     public RestaurantModel() {
 

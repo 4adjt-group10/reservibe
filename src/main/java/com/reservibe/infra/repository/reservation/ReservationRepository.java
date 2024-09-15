@@ -1,15 +1,11 @@
 package com.reservibe.infra.repository.reservation;
 
 import com.reservibe.domain.entity.client.Client;
-import com.reservibe.domain.enums.reservation.ReservationStatus;
 import com.reservibe.infra.model.reservation.ReservationModel;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 

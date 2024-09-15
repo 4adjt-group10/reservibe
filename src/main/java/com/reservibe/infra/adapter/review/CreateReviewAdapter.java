@@ -6,6 +6,7 @@ import com.reservibe.domain.entity.review.Review;
 import com.reservibe.domain.enums.reservation.ReservationStatus;
 import com.reservibe.domain.gateway.review.CreateReviewInterface;
 import com.reservibe.infra.adapter.reservation.SearchReservationAdapter;
+import com.reservibe.infra.model.reservation.ReservationModel;
 import com.reservibe.infra.model.restaurant.RestaurantModel;
 import com.reservibe.infra.model.review.ReviewModel;
 import com.reservibe.infra.repository.review.ReviewRepository;
@@ -27,18 +28,13 @@ public class CreateReviewAdapter implements CreateReviewInterface {
     public Review createReview(Review review) {
         List<Reservation> reservationList = searchReservationAdapter
                 .findReservationByClientAndStatus(review.getClient(), ReservationStatus.CONFIRMED);
-        Restaurant restaurant = reservationList.get(0).getTable().getRestaurant();
-        ReviewModel reviewModel = reviewRepository.save(new ReviewModel(new RestaurantModel(restaurant.getId(),
-                restaurant.getName(),
-                restaurant.getAddress(),
-                restaurant.getPhoneNumber(),
-                restaurant.getDescription(),
-                restaurant.getCuisine(),
-                restaurant.getOpeningHours()),
-                review.getClient(),
+        Reservation reservation = reservationList.get(0);
+        Restaurant restaurant = reservation.getTable().getRestaurant();
+        ReviewModel reviewModel = reviewRepository.save(new ReviewModel(new RestaurantModel(restaurant.getId()),
                 review.getReviewStars(),
                 LocalDateTime.now(),
-                review.getComment()));
+                review.getComment(),
+                new ReservationModel(reservation.getId())));
         review.setId(reviewModel.getId());
         return review;
     }
