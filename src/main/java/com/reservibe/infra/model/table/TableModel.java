@@ -4,7 +4,6 @@ import com.reservibe.domain.enums.table.TableStatus;
 import com.reservibe.infra.model.restaurant.RestaurantModel;
 import jakarta.persistence.*;
 
-
 import java.util.UUID;
 
 @Entity
