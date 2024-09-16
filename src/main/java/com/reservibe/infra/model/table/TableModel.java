@@ -3,10 +3,12 @@ package com.reservibe.infra.model.table;
 import com.reservibe.domain.enums.table.TableStatus;
 import com.reservibe.infra.model.restaurant.RestaurantModel;
 import jakarta.persistence.*;
+import lombok.Builder;
 
 import java.util.UUID;
 
 @Entity
+@Builder
 public class TableModel {
 
     @Id

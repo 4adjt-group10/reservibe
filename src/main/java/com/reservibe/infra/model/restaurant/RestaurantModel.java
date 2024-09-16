@@ -5,6 +5,7 @@ import com.reservibe.domain.entity.restaurant.OpeningHours;
 import com.reservibe.domain.enums.retaurant.Cuisine;
 import com.reservibe.infra.model.table.TableModel;
 import jakarta.persistence.*;
+import lombok.Builder;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
+@Builder
 public class RestaurantModel {
 
     @Id
