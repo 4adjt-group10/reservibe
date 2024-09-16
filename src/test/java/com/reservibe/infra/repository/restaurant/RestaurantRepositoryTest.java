@@ -1,6 +1,7 @@
 package com.reservibe.infra.repository.restaurant;
 
 import com.reservibe.domain.entity.restaurant.Address;
+import com.reservibe.domain.entity.restaurant.OpeningHours;
 import com.reservibe.domain.enums.retaurant.Cuisine;
 import com.reservibe.domain.enums.table.TableStatus;
 import com.reservibe.infra.model.restaurant.RestaurantModel;
@@ -11,6 +12,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.time.DayOfWeek;
+import java.time.LocalTime;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -74,7 +77,7 @@ public class RestaurantRepositoryTest {
 
         verify(restaurantRepository, times(1)).findById(any(UUID.class));
 
-       }
+    }
 
     @Test
     void shouldListAllRestaurantsByCuisine(){
@@ -111,7 +114,7 @@ public class RestaurantRepositoryTest {
         var restaurant = createRestaurant(UUID.randomUUID());
 
         //Define comportamento quando for chamado esse método com o UUID
-       doNothing().when(restaurantRepository).delete(any(RestaurantModel.class));
+        doNothing().when(restaurantRepository).delete(any(RestaurantModel.class));
 
         restaurantRepository.delete(restaurant);
 
@@ -120,30 +123,34 @@ public class RestaurantRepositoryTest {
     }
 
     private RestaurantModel createRestaurant(UUID id){
-        ArrayList lista = new ArrayList();
-        lista.add(13);
-        lista.add(14);
-        lista.add(15);
+        List<OpeningHours>openingHours = new ArrayList<>();
+        OpeningHours openingHours1 = new OpeningHours(DayOfWeek.MONDAY, LocalTime.now(),LocalTime.now());
+        OpeningHours openingHours2 = new OpeningHours(DayOfWeek.FRIDAY, LocalTime.now(),LocalTime.now());
+        OpeningHours openingHours3 = new OpeningHours(DayOfWeek.SATURDAY, LocalTime.now(),LocalTime.now());
+        openingHours.add(openingHours2);
+        openingHours.add(openingHours3);
+        openingHours.add(openingHours1);
+        List<TableModel> tableModels = new ArrayList<>();
+        tableModels.add(createTable());
+        var addres = new Address("street",
+                123,
+                "neighborhood",
+                "city",
+                "state",
+                "country",
+                "zipCode");
 
-        return RestaurantModel.builder()
-                .id(id)
-                .name("Restaurante")
-                .address(new Address("street",
-        123,
-        "neighborhood",
-        "city",
-        "state",
-        "country",
-        "zipCode"))
-                .phoneNumber("1187652435")
-                .description("Restaurante italiano")
-                .cuisine(Cuisine.ITALIAN)
-                .openingHours(lista)
-                .tables(List.of(createTable()))
-                .build();
+        return new RestaurantModel(id,
+                "Restaurante",
+                addres,
+                "1187652435",
+                "Restaurante italiano",
+                Cuisine.ITALIAN,
+                openingHours,tableModels);
     }
 
     private TableModel createTable(){
+
         return new TableModel(1,4, TableStatus.FREE);
     }
 }
