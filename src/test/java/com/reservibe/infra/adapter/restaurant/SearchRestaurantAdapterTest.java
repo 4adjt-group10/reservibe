@@ -1,15 +1,9 @@
 package com.reservibe.infra.adapter.restaurant;
 
 import com.reservibe.domain.entity.restaurant.Address;
-import com.reservibe.domain.entity.restaurant.OpeningHours;
-import com.reservibe.domain.entity.restaurant.Restaurant;
-import com.reservibe.domain.entity.table.Table;
 import com.reservibe.domain.enums.retaurant.Cuisine;
-import com.reservibe.domain.enums.table.TableStatus;
-import com.reservibe.infra.model.restaurant.RestaurantModel;
-import com.reservibe.infra.model.table.TableModel;
+import com.reservibe.helper.RestaurantHelper;
 import com.reservibe.infra.repository.restaurant.RestaurantRepository;
-import com.reservibe.infra.repository.table.TableModelRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,6 +29,8 @@ public class SearchRestaurantAdapterTest {
 
     AutoCloseable mock;
 
+    RestaurantHelper helper = new RestaurantHelper();
+
     @BeforeEach
     void setup(){
         mock = MockitoAnnotations.openMocks(this);
@@ -49,7 +45,7 @@ public class SearchRestaurantAdapterTest {
     @Test
     void shouldSearchByName(){
         var id = UUID.randomUUID();
-        var restaurant = createRestaurant(id);
+        var restaurant = helper.createRestaurant(id);
 
         when(restaurantRepository.findByName(any(String.class)))
                 .thenReturn(Optional.of(restaurant));
@@ -76,7 +72,7 @@ public class SearchRestaurantAdapterTest {
                 "country",
                 "zipCode");
 
-        var listOfRestaurant = Arrays.asList(createRestaurant(UUID.randomUUID()),createRestaurant(UUID.randomUUID()));
+        var listOfRestaurant = Arrays.asList(helper.createRestaurant(UUID.randomUUID()),helper.createRestaurant(UUID.randomUUID()));
 
         when(restaurantRepository.findAllByAddress(any(Address.class)))
                 .thenReturn(listOfRestaurant);
@@ -96,7 +92,7 @@ public class SearchRestaurantAdapterTest {
     @Test
     void shouldSearchAllRestaurantsByCity(){
 
-        var listOfRestaurant = Arrays.asList(createRestaurant(UUID.randomUUID()),createRestaurant(UUID.randomUUID()));
+        var listOfRestaurant = Arrays.asList(helper.createRestaurant(UUID.randomUUID()),helper.createRestaurant(UUID.randomUUID()));
 
         when(restaurantRepository.findAllByAddress_City(any(String.class)))
                 .thenReturn(listOfRestaurant);
@@ -115,7 +111,7 @@ public class SearchRestaurantAdapterTest {
 
     @Test
     void shouldSearchAllRestaurantsByCusine(){
-        var listOfRestaurant = Arrays.asList(createRestaurant(UUID.randomUUID()),createRestaurant(UUID.randomUUID()));
+        var listOfRestaurant = Arrays.asList(helper.createRestaurant(UUID.randomUUID()),helper.createRestaurant(UUID.randomUUID()));
 
         when(restaurantRepository.findAllByCuisine(any(Cuisine.class)))
                 .thenReturn(listOfRestaurant);
@@ -132,60 +128,5 @@ public class SearchRestaurantAdapterTest {
 
     }
 
-    //Não vai ter por Opening Hours?
-
-//    @Test
-//    void shouldSearchAllRestaurantsByOpeningHours(){
-//        OpeningHours openingHours = new OpeningHours(DayOfWeek.FRIDAY,LocalTime.now(), LocalTime.now());
-//
-//
-//        var listOfRestaurant = Arrays.asList(createRestaurant(UUID.randomUUID()),createRestaurant(UUID.randomUUID()));
-//
-//        when(restaurantRepository.findAllByOpeningHours(any(OpeningHours.class)))
-//                .thenReturn(listOfRestaurant);
-//
-//
-//        var restaurantRead = adapter.find(Cuisine.ITALIAN);
-//
-//        assertThat(restaurantRead)
-//                .isNotNull()
-//                .hasSize(2);
-//
-//        verify(restaurantRepository, times(1)).findAllByOpeningHours(any(OpeningHours.class));
-//
-//
-//    }
-
-    private RestaurantModel createRestaurant(UUID id){
-        List<OpeningHours>openingHours = new ArrayList<>();
-        OpeningHours openingHours1 = new OpeningHours(DayOfWeek.MONDAY, LocalTime.now(),LocalTime.now());
-        OpeningHours openingHours2 = new OpeningHours(DayOfWeek.FRIDAY, LocalTime.now(),LocalTime.now());
-        OpeningHours openingHours3 = new OpeningHours(DayOfWeek.SATURDAY, LocalTime.now(),LocalTime.now());
-        openingHours.add(openingHours2);
-        openingHours.add(openingHours3);
-        openingHours.add(openingHours1);
-        List<TableModel> tableModels = new ArrayList<>();
-        tableModels.add(createTable());
-        var addres = new Address("street",
-                123,
-                "neighborhood",
-                "São Paulo",
-                "state",
-                "country",
-                "zipCode");
-
-        return new RestaurantModel(id,
-                "Restaurante",
-                addres,
-                "1187652435",
-                "Restaurante italiano",
-                Cuisine.ITALIAN,
-                openingHours,tableModels);
-    }
-
-    private TableModel createTable(){
-
-        return new TableModel(1,4, TableStatus.FREE);
-    }
 
 }

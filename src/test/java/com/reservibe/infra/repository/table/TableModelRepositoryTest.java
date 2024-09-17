@@ -2,6 +2,7 @@ package com.reservibe.infra.repository.table;
 
 
 import com.reservibe.domain.enums.table.TableStatus;
+import com.reservibe.helper.TableHelper;
 import com.reservibe.infra.model.table.TableModel;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,6 +23,8 @@ public class TableModelRepositoryTest {
 
     AutoCloseable openMocks;
 
+    TableHelper helper = new TableHelper();
+
 
     @BeforeEach
     void setup(){
@@ -36,7 +39,7 @@ public class TableModelRepositoryTest {
     @Test
     void shouldSaveTable(){
         var id = UUID.randomUUID();
-        var table = createTable(id);
+        var table = helper.createTableModel(id);
         when(tableModelRepository.save(any(TableModel.class))).thenReturn(table);
         //Act
         var tableSaved = tableModelRepository.save(table);
@@ -54,7 +57,7 @@ public class TableModelRepositoryTest {
     void shouldListTableByIdAnsStatus(){
         //Arrange
         var id = UUID.randomUUID();
-        var table = createTable(id);
+        var table = helper.createTableModel(id);
         var status = table.getStatus();
         //var listOfTables = Arrays.asList(createTable(id),createTable());
         when(tableModelRepository.findByIdAndStatus(any(UUID.class),any(TableStatus.class))).thenReturn(Optional.of(table));
@@ -80,7 +83,7 @@ public class TableModelRepositoryTest {
     @Test
     void shouldDeleteTable(){
         var id = UUID.randomUUID();
-        var table = createTable(id);
+        var table = helper.createTableModel(id);
 
         //Define comportamento quando for chamado esse método com o UUID
         doNothing().when(tableModelRepository).delete(any(TableModel.class));
@@ -92,10 +95,6 @@ public class TableModelRepositoryTest {
     }
 
 
-    private TableModel createTable(UUID id){
-
-        return new TableModel(id,1,4, TableStatus.FREE);
-    }
 
 
 }

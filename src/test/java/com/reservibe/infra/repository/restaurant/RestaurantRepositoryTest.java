@@ -4,6 +4,8 @@ import com.reservibe.domain.entity.restaurant.Address;
 import com.reservibe.domain.entity.restaurant.OpeningHours;
 import com.reservibe.domain.enums.retaurant.Cuisine;
 import com.reservibe.domain.enums.table.TableStatus;
+import com.reservibe.helper.RestaurantHelper;
+import com.reservibe.helper.TableHelper;
 import com.reservibe.infra.model.restaurant.RestaurantModel;
 import com.reservibe.infra.model.table.TableModel;
 import org.junit.jupiter.api.AfterEach;
@@ -27,6 +29,9 @@ public class RestaurantRepositoryTest {
 
     AutoCloseable openMocks;
 
+    RestaurantHelper helper = new RestaurantHelper();
+
+
     @BeforeEach
     void setup(){
         openMocks = MockitoAnnotations.openMocks(this);
@@ -39,7 +44,7 @@ public class RestaurantRepositoryTest {
 
     @Test
     void shouldSaveRestaurant(){
-        var restaurant = createRestaurant(UUID.randomUUID());
+        var restaurant = helper.createRestaurant(UUID.randomUUID());
 
         when(restaurantRepository.save(any(RestaurantModel.class))).thenReturn(restaurant);
         //Act
@@ -57,7 +62,7 @@ public class RestaurantRepositoryTest {
     void shouldListRestaurant(){
         //Arrange
         var id = UUID.randomUUID();
-        var restaurant = createRestaurant(id);
+        var restaurant = helper.createRestaurant(id);
 
         //Define comportamento quando for chamado esse método com o UUID
         when(restaurantRepository.findById(any(UUID.class))).thenReturn(Optional.of(restaurant));
@@ -82,7 +87,7 @@ public class RestaurantRepositoryTest {
     @Test
     void shouldListAllRestaurantsByCuisine(){
         //Arrange
-        var listOfRestaurant = Arrays.asList(createRestaurant(UUID.randomUUID()),createRestaurant(UUID.randomUUID()));
+        var listOfRestaurant = Arrays.asList(helper.createRestaurant(UUID.randomUUID()),helper.createRestaurant(UUID.randomUUID()));
         when(restaurantRepository.findAllByCuisine(any(Cuisine.class))).thenReturn(listOfRestaurant);
 
         //Act
@@ -101,7 +106,7 @@ public class RestaurantRepositoryTest {
     @Test
     void shouldListAllRestaurantsByName(){
         //Arrange
-        var restaurant = createRestaurant(UUID.randomUUID());
+        var restaurant = helper.createRestaurant(UUID.randomUUID());
         when(restaurantRepository.findByName(any(String.class))).thenReturn(Optional.of(restaurant));
 
         //Act
@@ -124,7 +129,7 @@ public class RestaurantRepositoryTest {
     @Test
     void shouldListAllRestaurantsByCity(){
         //Arrange
-        var listOfRestaurant = Arrays.asList(createRestaurant(UUID.randomUUID()),createRestaurant(UUID.randomUUID()));
+        var listOfRestaurant = Arrays.asList(helper.createRestaurant(UUID.randomUUID()),helper.createRestaurant(UUID.randomUUID()));
         when(restaurantRepository.findAllByAddress_City(any(String.class))).thenReturn(listOfRestaurant);
 
         //Act
@@ -151,7 +156,7 @@ public class RestaurantRepositoryTest {
                 "country",
                 "zipCode");
         //Arrange
-        var listOfRestaurant = Arrays.asList(createRestaurant(UUID.randomUUID()),createRestaurant(UUID.randomUUID()));
+        var listOfRestaurant = Arrays.asList(helper.createRestaurant(UUID.randomUUID()),helper.createRestaurant(UUID.randomUUID()));
         when(restaurantRepository.findAllByAddress(any(Address.class))).thenReturn(listOfRestaurant);
 
         //Act
@@ -172,7 +177,7 @@ public class RestaurantRepositoryTest {
     void shouldListAllRestaurantsOpeningHours(){
         OpeningHours openingHours = new OpeningHours(DayOfWeek.FRIDAY,LocalTime.now(), LocalTime.now());
         //Arrange
-        var listOfRestaurant = Arrays.asList(createRestaurant(UUID.randomUUID()),createRestaurant(UUID.randomUUID()));
+        var listOfRestaurant = Arrays.asList(helper.createRestaurant(UUID.randomUUID()),helper.createRestaurant(UUID.randomUUID()));
         when(restaurantRepository.findAllByOpeningHours(any(OpeningHours.class))).thenReturn(listOfRestaurant);
 
         //Act
@@ -196,7 +201,7 @@ public class RestaurantRepositoryTest {
 
     @Test
     void shouldDeleteRestaurant(){
-        var restaurant = createRestaurant(UUID.randomUUID());
+        var restaurant = helper.createRestaurant(UUID.randomUUID());
 
         //Define comportamento quando for chamado esse método com o UUID
         doNothing().when(restaurantRepository).delete(any(RestaurantModel.class));
@@ -207,35 +212,5 @@ public class RestaurantRepositoryTest {
 
     }
 
-    private RestaurantModel createRestaurant(UUID id){
-        List<OpeningHours>openingHours = new ArrayList<>();
-        OpeningHours openingHours1 = new OpeningHours(DayOfWeek.MONDAY, LocalTime.now(),LocalTime.now());
-        OpeningHours openingHours2 = new OpeningHours(DayOfWeek.FRIDAY, LocalTime.now(),LocalTime.now());
-        OpeningHours openingHours3 = new OpeningHours(DayOfWeek.SATURDAY, LocalTime.now(),LocalTime.now());
-        openingHours.add(openingHours2);
-        openingHours.add(openingHours3);
-        openingHours.add(openingHours1);
-        List<TableModel> tableModels = new ArrayList<>();
-        tableModels.add(createTable());
-        var addres = new Address("street",
-                123,
-                "neighborhood",
-                "São Paulo",
-                "state",
-                "country",
-                "zipCode");
 
-        return new RestaurantModel(id,
-                "Restaurante",
-                addres,
-                "1187652435",
-                "Restaurante italiano",
-                Cuisine.ITALIAN,
-                openingHours,tableModels);
-    }
-
-    private TableModel createTable(){
-
-        return new TableModel(1,4, TableStatus.FREE);
-    }
 }
