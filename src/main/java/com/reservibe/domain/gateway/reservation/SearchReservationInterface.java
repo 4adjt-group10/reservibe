@@ -12,4 +12,6 @@ public interface SearchReservationInterface {
     List<Reservation> findReservationByRestaurantId(UUID code);
 
     List<Reservation> findReservationByClientAndStatus(Client client, ReservationStatus status);
+
+    Reservation findById(UUID id);
 }

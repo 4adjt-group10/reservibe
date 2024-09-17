@@ -4,19 +4,19 @@ import com.reservibe.domain.entity.reservation.Reservation;
 import com.reservibe.domain.enums.reservation.ReservationStatus;
 import com.reservibe.domain.enums.table.TableStatus;
 import com.reservibe.domain.input.reservation.CreateReservationInput;
-import com.reservibe.infra.adapter.reservation.CreateReservationAdapter;
+import com.reservibe.infra.adapter.reservation.RegisterReservationAdapter;
 import com.reservibe.infra.adapter.table.UpdateTableAdapter;
 import com.reservibe.infra.adapter.table.SearchTableByIdAdapter;
 
 public class CreateReservationUsecase {
-    private final CreateReservationAdapter createReservationAdapter;
+    private final RegisterReservationAdapter registerReservationAdapter;
     private final SearchTableByIdAdapter searchTableByIdAdapter;
     private final UpdateTableAdapter updateTableAdapter;
 
-    public CreateReservationUsecase(CreateReservationAdapter createReservationAdapter,
+    public CreateReservationUsecase(RegisterReservationAdapter registerReservationAdapter,
                                     SearchTableByIdAdapter searchTableByIdAdapter,
                                     UpdateTableAdapter updateTableAdapter) {
-        this.createReservationAdapter = createReservationAdapter;
+        this.registerReservationAdapter = registerReservationAdapter;
         this.searchTableByIdAdapter = searchTableByIdAdapter;
         this.updateTableAdapter = updateTableAdapter;
     }
@@ -28,7 +28,7 @@ public class CreateReservationUsecase {
                 input.reservationDate(),
                 table,
                 input.notesObservations());
-        createReservationAdapter.createReservation(reserv);
+        registerReservationAdapter.registerReservation(reserv);
         updateTableAdapter.updateTableWithStatus(table.getId(), TableStatus.RESERVED);
     }
 }

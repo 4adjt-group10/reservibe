@@ -9,6 +9,7 @@ import com.reservibe.domain.gateway.reservation.SearchReservationInterface;
 import com.reservibe.infra.model.restaurant.RestaurantModel;
 import com.reservibe.infra.model.table.TableModel;
 import com.reservibe.infra.repository.reservation.ReservationRepository;
+import jakarta.persistence.EntityNotFoundException;
 
 import java.util.List;
 import java.util.UUID;
@@ -65,5 +66,22 @@ public class SearchReservationAdapter implements SearchReservationInterface {
                             r.getNotesObservations()
                     );
                 }).toList();
+    }
+
+    @Override
+    public Reservation findById(UUID id) {
+        var reservation = reservationRepository.findById(id)
+                .orElseThrow(()->new EntityNotFoundException("Table not Available"));
+        var table = new Table(reservation.getTable().getId(),
+                reservation.getTable().getNumber(),
+                reservation.getTable().getSeats(),
+                reservation.getTable().getStatus());
+
+        return new Reservation(reservation.getId(),
+                reservation.getClient(),
+                reservation.getStatus(),
+                reservation.getReservationDate(),
+                table,
+                reservation.getNotesObservations());
     }
 }
