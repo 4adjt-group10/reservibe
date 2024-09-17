@@ -44,7 +44,7 @@ Criar um sistema de Reserva e Avaliação de Restaurantes.
    e reservas.
 5. Medir cobertura de teste: Usar o coverage para metrificar a
    porcentagem de testes realizados.
-   Deploy:
+6. Deploy:
    Ambientes Diversos de deploy: Realizar deploy do sistema em diferentes
    ambientes, incluindo local, AWS ECS, Azure e uma plataforma de nuvem gratuita
    como Heroku, Render, entre outros.
