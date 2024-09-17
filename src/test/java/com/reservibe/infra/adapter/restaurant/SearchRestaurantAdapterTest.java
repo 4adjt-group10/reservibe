@@ -1,14 +1,17 @@
 package com.reservibe.infra.adapter.restaurant;
 
 import com.reservibe.domain.entity.restaurant.Address;
+import com.reservibe.domain.entity.restaurant.OpeningHours;
 import com.reservibe.domain.enums.retaurant.Cuisine;
 import com.reservibe.helper.RestaurantHelper;
 import com.reservibe.infra.repository.restaurant.RestaurantRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -59,6 +62,16 @@ public class SearchRestaurantAdapterTest {
         assertThat(restaurantRead.getDescription()).isEqualTo(restaurant.getDescription());
         assertThat(restaurantRead.getPhoneNumber()).isEqualTo(restaurant.getPhoneNumber());
         verify(restaurantRepository, times(1)).findByName(any(String.class));
+
+    }
+    @Test
+    void shouldNotSearchByName(){
+
+        when(restaurantRepository.findByName(any(String.class)))
+                .thenReturn(Optional.empty());
+
+        assertThrows(EntityNotFoundException.class,
+                () -> adapter.findRestaurantByName("Restaurante"));
 
     }
 

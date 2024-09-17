@@ -7,6 +7,7 @@ import com.reservibe.domain.entity.table.Table;
 import com.reservibe.domain.enums.retaurant.Cuisine;
 import com.reservibe.domain.enums.table.TableStatus;
 import com.reservibe.infra.model.restaurant.RestaurantModel;
+import com.reservibe.infra.model.table.TableModel;
 import com.reservibe.infra.repository.restaurant.RestaurantRepository;
 import com.reservibe.infra.repository.table.TableModelRepository;
 import org.junit.jupiter.api.AfterEach;
@@ -51,10 +52,10 @@ public class RestaurantRegisterAdapterTest {
     @Test
     void shouldSaveRestaurant(){
         var id = UUID.randomUUID();
+        var restaurantModel = createRestaurantModel(id);
         var restaurant = createRestaurant(id);
-
         when(restaurantRepository.save(any(RestaurantModel.class)))
-                .thenAnswer(i -> i.getArgument(0)); //essa chamada acessa um método e verifica dentro dele as informações (deve receber um professional e retornar esse professional)
+                .thenReturn(restaurantModel);
 
         var restaurantCreated = adapter.registerRestaurant(restaurant);
 
@@ -72,6 +73,7 @@ public class RestaurantRegisterAdapterTest {
         verify(restaurantRepository,times(1)).save(any(RestaurantModel.class));
 
     }
+
 
     private Restaurant createRestaurant(UUID id){
         List<OpeningHours>openingHours = new ArrayList<>();
@@ -100,8 +102,40 @@ public class RestaurantRegisterAdapterTest {
                 openingHours,tables);
     }
 
+    private RestaurantModel createRestaurantModel(UUID id){
+        List<OpeningHours>openingHours = new ArrayList<>();
+        OpeningHours openingHours1 = new OpeningHours(DayOfWeek.MONDAY, LocalTime.now(),LocalTime.now());
+        OpeningHours openingHours2 = new OpeningHours(DayOfWeek.FRIDAY, LocalTime.now(),LocalTime.now());
+        OpeningHours openingHours3 = new OpeningHours(DayOfWeek.SATURDAY, LocalTime.now(),LocalTime.now());
+        openingHours.add(openingHours2);
+        openingHours.add(openingHours3);
+        openingHours.add(openingHours1);
+        List<TableModel> tables = new ArrayList<>();
+        tables.add(createTableModel());
+        var addres = new Address("street",
+                123,
+                "neighborhood",
+                "city",
+                "state",
+                "country",
+                "zipCode");
+
+        return new RestaurantModel(id,
+                "Restaurante",
+                addres,
+                "1187652435",
+                "Restaurante italiano",
+                Cuisine.ITALIAN,
+                openingHours,tables);
+    }
+
     private Table createTable(){
 
         return new Table(1,4, TableStatus.FREE);
+    }
+
+    private TableModel createTableModel(){
+
+        return new TableModel(1,4, TableStatus.FREE);
     }
 }

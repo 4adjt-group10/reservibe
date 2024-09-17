@@ -48,12 +48,14 @@ public class UpdateTableAdapterTest {
         var newTable = table;
         newTable.setStatus(TableStatus.OCCUPIED);
 
-        when(tableModelRepository.findByIdAndStatus(any(UUID.class),any(TableStatus.class)))
+        when(tableModelRepository.findById(id))
                 .thenReturn(Optional.of(table));
+
         when(tableModelRepository.save(newTable))
-                .thenAnswer(i -> i.getArgument(0)); //essa chamada acessa um método e verifica dentro dele as informações (deve receber um professional e retornar esse professional)
+                .thenReturn(table);
 
         adapter.updateTableWithStatus(id,TableStatus.FREE);
+
 
         verify(tableModelRepository,times(1)).save(any(TableModel.class));
 
