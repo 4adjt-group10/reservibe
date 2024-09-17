@@ -54,7 +54,7 @@ public class RestaurantRepositoryTest {
                 .isNotNull()
                 .isEqualTo(restaurant);
 
-        //verifica que o repository foi chamado ao menos 1 vez para salvar algo
+
         verify(restaurantRepository, times(1)).save(any(RestaurantModel.class));
     }
 
@@ -64,7 +64,7 @@ public class RestaurantRepositoryTest {
         var id = UUID.randomUUID();
         var restaurant = helper.createRestaurant(id);
 
-        //Define comportamento quando for chamado esse método com o UUID
+
         when(restaurantRepository.findById(any(UUID.class))).thenReturn(Optional.of(restaurant));
 
         //Act
@@ -195,7 +195,7 @@ public class RestaurantRepositoryTest {
     void shouldDeleteRestaurant(){
         var restaurant = helper.createRestaurant(UUID.randomUUID());
 
-        //Define comportamento quando for chamado esse método com o UUID
+
         doNothing().when(restaurantRepository).delete(any(RestaurantModel.class));
 
         restaurantRepository.delete(restaurant);
