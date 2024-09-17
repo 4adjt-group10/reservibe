@@ -138,7 +138,6 @@ public class RestaurantRepositoryTest {
         //
         assertThat(listRestaurants)
                 .isNotNull()
-                .containsAll(listRestaurants)
                 .hasSize(2);
 
 
@@ -165,7 +164,6 @@ public class RestaurantRepositoryTest {
         //
         assertThat(listRestaurants)
                 .isNotNull()
-                .containsAll(listRestaurants)
                 .hasSize(2);
 
 
@@ -186,18 +184,12 @@ public class RestaurantRepositoryTest {
         //
         assertThat(listRestaurants)
                 .isNotNull()
-                .containsAll(listRestaurants)
                 .hasSize(2);
 
 
         verify(restaurantRepository, times(1)).findAllByOpeningHours(openingHours);
 
     }
-//
-//    @Test
-//    void shouldUpdateRestaurant(){
-//        fail("Método não implementado");
-//    }
 
     @Test
     void shouldDeleteRestaurant(){
