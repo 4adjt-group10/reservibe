@@ -91,7 +91,6 @@ public class RestaurantRepositoryTest {
         //
         assertThat(listRestaurants)
                 .isNotNull()
-                .containsAll(listRestaurants)
                 .hasSize(2);
 
 
@@ -99,10 +98,96 @@ public class RestaurantRepositoryTest {
 
     }
 
-//    @Test
-//    void shouldListAllRestaurantsOpeningHours(){
-//        fail("Método não implementado");
-//    }
+    @Test
+    void shouldListAllRestaurantsByName(){
+        //Arrange
+        var restaurant = createRestaurant(UUID.randomUUID());
+        when(restaurantRepository.findByName(any(String.class))).thenReturn(Optional.of(restaurant));
+
+        //Act
+        var listRestaurants = restaurantRepository.findByName("Restaurante");
+
+        //Assert
+        assertThat(listRestaurants)
+                .isPresent()
+                .containsSame(restaurant);
+
+        listRestaurants.ifPresent(rest ->{
+            assertThat(rest.getId()).isEqualTo(restaurant.getId());
+            assertThat(rest.getName()).isEqualTo(restaurant.getName());
+        });
+
+        verify(restaurantRepository, times(1)).findByName("Restaurante");
+
+    }
+
+    @Test
+    void shouldListAllRestaurantsByCity(){
+        //Arrange
+        var listOfRestaurant = Arrays.asList(createRestaurant(UUID.randomUUID()),createRestaurant(UUID.randomUUID()));
+        when(restaurantRepository.findAllByAddress_City(any(String.class))).thenReturn(listOfRestaurant);
+
+        //Act
+        var listRestaurants = restaurantRepository.findAllByAddress_City("São Paulo");
+
+        //
+        assertThat(listRestaurants)
+                .isNotNull()
+                .containsAll(listRestaurants)
+                .hasSize(2);
+
+
+        verify(restaurantRepository, times(1)).findAllByAddress_City("São Paulo");
+
+    }
+
+    @Test
+    void shouldListAllRestaurantsByAddress(){
+        Address address = new Address("street",
+                123,
+                "neighborhood",
+                "São Paulo",
+                "state",
+                "country",
+                "zipCode");
+        //Arrange
+        var listOfRestaurant = Arrays.asList(createRestaurant(UUID.randomUUID()),createRestaurant(UUID.randomUUID()));
+        when(restaurantRepository.findAllByAddress(any(Address.class))).thenReturn(listOfRestaurant);
+
+        //Act
+        var listRestaurants = restaurantRepository.findAllByAddress(address);
+
+        //
+        assertThat(listRestaurants)
+                .isNotNull()
+                .containsAll(listRestaurants)
+                .hasSize(2);
+
+
+        verify(restaurantRepository, times(1)).findAllByAddress(address);
+
+    }
+
+    @Test
+    void shouldListAllRestaurantsOpeningHours(){
+        OpeningHours openingHours = new OpeningHours(DayOfWeek.FRIDAY,LocalTime.now(), LocalTime.now());
+        //Arrange
+        var listOfRestaurant = Arrays.asList(createRestaurant(UUID.randomUUID()),createRestaurant(UUID.randomUUID()));
+        when(restaurantRepository.findAllByOpeningHours(any(OpeningHours.class))).thenReturn(listOfRestaurant);
+
+        //Act
+        var listRestaurants = restaurantRepository.findAllByOpeningHours(openingHours);
+
+        //
+        assertThat(listRestaurants)
+                .isNotNull()
+                .containsAll(listRestaurants)
+                .hasSize(2);
+
+
+        verify(restaurantRepository, times(1)).findAllByOpeningHours(openingHours);
+
+    }
 //
 //    @Test
 //    void shouldUpdateRestaurant(){
@@ -135,7 +220,7 @@ public class RestaurantRepositoryTest {
         var addres = new Address("street",
                 123,
                 "neighborhood",
-                "city",
+                "São Paulo",
                 "state",
                 "country",
                 "zipCode");
