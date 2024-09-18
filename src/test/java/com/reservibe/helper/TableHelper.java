@@ -1,6 +1,7 @@
 package com.reservibe.helper;
 
 import com.reservibe.domain.enums.table.TableStatus;
+import com.reservibe.domain.input.table.TableInput;
 import com.reservibe.infra.model.table.TableModel;
 
 import java.util.UUID;
@@ -15,5 +16,10 @@ public class TableHelper {
     public final TableModel createTableModelWithoutId(){
 
         return new TableModel(1,4, TableStatus.FREE);
+    }
+
+    public final TableInput createTableInput(){
+
+        return new TableInput(1,4, TableStatus.FREE);
     }
 }

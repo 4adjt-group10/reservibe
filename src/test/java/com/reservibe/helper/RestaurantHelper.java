@@ -3,6 +3,8 @@ package com.reservibe.helper;
 import com.reservibe.domain.entity.restaurant.Address;
 import com.reservibe.domain.entity.restaurant.OpeningHours;
 import com.reservibe.domain.enums.retaurant.Cuisine;
+import com.reservibe.domain.input.restaurant.RestaurantInput;
+import com.reservibe.domain.input.table.TableInput;
 import com.reservibe.infra.model.restaurant.RestaurantModel;
 import com.reservibe.infra.model.table.TableModel;
 
@@ -41,5 +43,32 @@ public class RestaurantHelper {
                 "Restaurante italiano",
                 Cuisine.ITALIAN,
                 openingHours,tableModels);
+    }
+
+    public final RestaurantInput createRestaurantInput(){
+        List<OpeningHours> openingHours = new ArrayList<>();
+        OpeningHours openingHours1 = new OpeningHours(DayOfWeek.MONDAY, LocalTime.now(),LocalTime.now());
+        OpeningHours openingHours2 = new OpeningHours(DayOfWeek.FRIDAY, LocalTime.now(),LocalTime.now());
+        OpeningHours openingHours3 = new OpeningHours(DayOfWeek.SATURDAY, LocalTime.now(),LocalTime.now());
+        openingHours.add(openingHours2);
+        openingHours.add(openingHours3);
+        openingHours.add(openingHours1);
+        List<TableInput> tableInputs = new ArrayList<>();
+        tableInputs.add(helper.createTableInput());
+        var addres = new Address("street",
+                123,
+                "neighborhood",
+                "São Paulo",
+                "state",
+                "country",
+                "zipCode");
+
+        return new RestaurantInput(
+                "Restaurante",
+                addres,
+                "1187652435",
+                "Restaurante italiano",
+                Cuisine.ITALIAN,
+                openingHours,tableInputs);
     }
 }
