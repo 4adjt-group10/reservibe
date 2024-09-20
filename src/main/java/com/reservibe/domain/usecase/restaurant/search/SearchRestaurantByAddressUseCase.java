@@ -13,7 +13,6 @@ public class SearchRestaurantByAddressUseCase {
         this.searchRestaurantAdapter = searchRestaurantAdapter;
     }
 
-    //TODO: aprimorar lógica de retorno. Usar retornos como 404, 500 e etc
     public RestaurantListOutput execute(Address address) {
         return new RestaurantListOutput(searchRestaurantAdapter.findAllByAddress(address),
                 new OutputStatus(200, "OK", "Restaurants found successfully"));
