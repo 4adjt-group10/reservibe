@@ -9,11 +9,11 @@ import com.reservibe.domain.input.reservation.CreateReservationInput;
 import com.reservibe.infra.adapter.reservation.RegisterReservationAdapter;
 import com.reservibe.infra.adapter.table.SearchTableByIdAdapter;
 import com.reservibe.infra.adapter.table.UpdateTableAdapter;
+import com.reservibe.infra.model.table.TableModel;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 
@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 
-import static org.codehaus.groovy.runtime.DefaultGroovyMethods.any;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -34,13 +34,16 @@ class CreateReservationUsecaseTest {
     @Mock
     private UpdateTableAdapter updateTableAdapter;
 
-    @InjectMocks
+
     private CreateReservationUsecase createReservationUsecase;
 
     AutoCloseable openMocks;
     @BeforeEach
     void setup(){
         openMocks = MockitoAnnotations.openMocks(this);
+        createReservationUsecase = new CreateReservationUsecase(registerReservationAdapter,
+                searchTableByIdAdapter,
+                updateTableAdapter);
     }
 
     @AfterEach
@@ -49,25 +52,20 @@ class CreateReservationUsecaseTest {
     }
 
     @Test
-    void execute() {
-    }
-
-    @Test
     void execute_success() {
 
         var input = createReservationInput();
         UUID tableID = input.tableID();
         var table = new Table(tableID, 2, 4, TableStatus.FREE);
-        when(searchTableByIdAdapter.getTableByIdAndStatusIsFree(createReservationInput().tableID())).thenReturn(table);
 
+        when(searchTableByIdAdapter.getTableByIdAndStatusIsFree(any(UUID.class))).thenReturn(table);
 
         createReservationUsecase.execute(createReservationInput());
         // then
-        verify(registerReservationAdapter, times(1)).registerReservation(createReservation());
-        verify(updateTableAdapter, times(1)).updateTableWithStatus(createReservation().getTable().getId(), TableStatus.RESERVED);
+        verify(updateTableAdapter, times(1)).updateTableWithStatus(tableID, TableStatus.RESERVED);
     }
 
-   public final CreateReservationInput createReservationInput(){
+    public final CreateReservationInput createReservationInput(){
         var client = new Client("name_teste", "email@test.com", "9998845436", "11234543210");
         LocalDateTime reservationDate = LocalDateTime.now();
         UUID tableID = UUID.randomUUID();
@@ -75,15 +73,15 @@ class CreateReservationUsecaseTest {
         return new CreateReservationInput(client, reservationDate ,tableID , notesObservations);
     }
 
-   public final Reservation createReservation() {
-       var client = new Client("name_teste", "email@test.com", "9998845436", "11234543210");
-       ReservationStatus status = ReservationStatus.PENDING;
-       LocalDateTime reservationDate = LocalDateTime.now();
-       var table = new Table(1,4, TableStatus.FREE);
-       return new Reservation(client, status, reservationDate, table, "Fake notes");
-   }
+    public final Reservation createReservation() {
+        var client = new Client("name_teste", "email@test.com", "9998845436", "11234543210");
+        ReservationStatus status = ReservationStatus.PENDING;
+        LocalDateTime reservationDate = LocalDateTime.now();
+        var table = new Table(2,4, TableStatus.FREE);
+        return new Reservation(client, status, reservationDate, table, "Fake notes");
+    }
 
-//
+    //
 //    @Test
 //    void execute_tableNotAvaible(){
 //        // given
@@ -105,4 +103,8 @@ class CreateReservationUsecaseTest {
 //        // Act & Assert
 //        assertThrows(TableNotAvailableException.class, () -> createReservationUsecase.execute(input));
 //    }
+    private TableModel createTableModel(UUID id){
+
+        return new TableModel(id,1,4, TableStatus.FREE);
+    }
 }
