@@ -71,4 +71,30 @@ public class RestaurantHelper {
                 Cuisine.ITALIAN,
                 openingHours,tableInputs);
     }
+    public final RestaurantInput createRestaurantInputWithOutTable(){
+        List<OpeningHours> openingHours = new ArrayList<>();
+        OpeningHours openingHours1 = new OpeningHours(DayOfWeek.MONDAY, LocalTime.now(),LocalTime.now());
+        OpeningHours openingHours2 = new OpeningHours(DayOfWeek.FRIDAY, LocalTime.now(),LocalTime.now());
+        OpeningHours openingHours3 = new OpeningHours(DayOfWeek.SATURDAY, LocalTime.now(),LocalTime.now());
+        openingHours.add(openingHours2);
+        openingHours.add(openingHours3);
+        openingHours.add(openingHours1);
+        List<TableInput> tableInputs = new ArrayList<>();
+        tableInputs.add(helper.createTableInput());
+        var addres = new Address("street",
+                123,
+                "neighborhood",
+                "São Paulo",
+                "state",
+                "country",
+                "zipCode");
+
+        return new RestaurantInput(
+                "Restaurante",
+                addres,
+                "1187652435",
+                "Restaurante italiano",
+                Cuisine.ITALIAN,
+                openingHours,null);
+    }
 }
