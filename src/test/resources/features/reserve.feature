@@ -1,6 +1,6 @@
 Feature: Reserve
   Scenario Template: reserve tables by type
-    Given that there are some saved tables
+    Given Given that there is a saved restaurant
     When I look for a table by "<type>"
     Then the return must be "200" success
     And the table must be presented

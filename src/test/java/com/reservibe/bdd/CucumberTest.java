@@ -1,11 +1,14 @@
 package com.reservibe.bdd;
 
-import org.junit.platform.suite.api.IncludeEngines;
-import org.junit.platform.suite.api.SelectClasspathResource;
-import org.junit.platform.suite.api.Suite;
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
+import org.junit.runner.RunWith;
 
-@Suite
-@IncludeEngines("cucumber")
-@SelectClasspathResource("features")
+@RunWith(Cucumber.class)
+@CucumberOptions(
+        features="src/test/resources/features/restaurant.feature",
+        glue = "com.reservibe.bdd",
+        plugin = {"pretty", "html:target/cucumber-reports"}
+)
 public class CucumberTest {
 }

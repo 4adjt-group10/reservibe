@@ -1,5 +1,4 @@
 Feature: Reservation
   Scenario: Create reserve
-    Given that I access the reservibe restaurant api
-    When I do a reserve
+    Given that I register a reservation
     Then the return must be "200" success
