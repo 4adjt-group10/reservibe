@@ -8,3 +8,6 @@ ENV TZ=America/Sao_Paulo
 
 # Expose the pgAdmin port
 EXPOSE 5050
+
+# Run pgAdmin as a non-root user
+USER pgadmin
