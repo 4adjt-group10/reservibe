@@ -46,6 +46,6 @@ Feature: Restaurant
     Then the return must be "200"
     Examples:
       |name           |city     |cuisine|
-      |Restaurante 13 |São Paulo|TURKISH|
-      |Restaurante 215|Serra Negra|CHINESE|
+      |Restaurante 181 |São Paulo|TURKISH|
+      |Restaurante 2122|Serra Negra|CHINESE|
 

@@ -9,6 +9,8 @@ import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import org.springframework.http.MediaType;
 
+import java.util.Optional;
+
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
 
@@ -92,6 +94,7 @@ public class StepDefinitionRestaurant {
     @When("I look for a restaurant by name")
     public void iLookForARestaurantByName() {
         response = when().get(ENDPOINT_API_FIND_BYNAME, restaurantValid.name());
+
     }
 
 
