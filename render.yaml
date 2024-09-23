@@ -13,7 +13,6 @@ services:
         value: e6Szg513GyrhXOPdAZ8nc15vbvO9LLOF
       - key: TZ
         value: America/Sao_Paulo
-    maxShutdownDelaySeconds: 300
 
   - type: web
     name: pgadmin
@@ -27,4 +26,3 @@ services:
         value: admin
       - key: TZ
         value: America/Sao_Paulo
-    maxShutdownDelaySeconds: 300
