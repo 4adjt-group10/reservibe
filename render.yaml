@@ -1,21 +1,4 @@
 services:
-  - type: database
-    name: postgres
-    plan: free
-    image: postgres:latest
-    envVars:
-      - key: POSTGRES_DB
-        value: mydatabase
-      - key: POSTGRES_PASSWORD
-        value: secret
-      - key: POSTGRES_USER
-        value: myuser
-      - key: TZ
-        value: America/Sao_Paulo
-    volumes:
-      - path: /var/lib/postgresql/data
-        name: postgres-data
-
   - type: web
     name: reservibe
     env: docker
@@ -32,8 +15,6 @@ services:
         value: America/Sao_Paulo
     ports:
       - containerPort: 8080
-    dependsOn:
-      - postgres
 
   - type: web
     name: pgadmin
@@ -49,5 +30,3 @@ services:
         value: America/Sao_Paulo
     ports:
       - containerPort: 5050
-    dependsOn:
-      - postgres
