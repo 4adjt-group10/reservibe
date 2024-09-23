@@ -6,15 +6,14 @@ services:
     dockerfilePath: ./Dockerfile
     envVars:
       - key: DATABASE_URL
-        value: jdbc:postgresql://postgres:5432/mydatabase
+        value: jdbc:postgresql://dpg-crovi3g8fa8c73dq5se0-a:5432/reservibe
       - key: DATABASE_USER
-        value: myuser
+        value: reservibe_user
       - key: DATABASE_PASSWORD
-        value: secret
+        value: e6Szg513GyrhXOPdAZ8nc15vbvO9LLOF
       - key: TZ
         value: America/Sao_Paulo
-    ports:
-      - containerPort: 8080
+    maxShutdownDelaySeconds: 300
 
   - type: web
     name: pgadmin
@@ -28,5 +27,4 @@ services:
         value: admin
       - key: TZ
         value: America/Sao_Paulo
-    ports:
-      - containerPort: 5050
+    maxShutdownDelaySeconds: 300
