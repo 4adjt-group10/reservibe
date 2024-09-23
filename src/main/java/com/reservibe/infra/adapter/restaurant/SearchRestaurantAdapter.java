@@ -46,7 +46,7 @@ public class SearchRestaurantAdapter implements SearchRestaurantInterface {
                         restaurantModel.getCuisine(),
                         restaurantModel.getOpeningHours(), restaurantModel.getTables().stream()
                         .filter(t -> t.getStatus().equals(FREE))
-                        .map(t -> new Table(t.getNumber(), t.getSeats(), t.getStatus())).toList())
+                        .map(t -> new Table(t.getId(),t.getNumber(), t.getSeats(), t.getStatus())).toList())
         ).toList();
     }
 
@@ -62,7 +62,7 @@ public class SearchRestaurantAdapter implements SearchRestaurantInterface {
                         restaurantModel.getOpeningHours(),
                         restaurantModel.getTables().stream()
                                 .filter(t -> t.getStatus().equals(FREE))
-                        .map(t -> new Table(t.getNumber(), t.getSeats(), t.getStatus())).toList())
+                        .map(t -> new Table(t.getId(),t.getNumber(), t.getSeats(), t.getStatus())).toList())
         ).toList();
     }
 
@@ -78,7 +78,7 @@ public class SearchRestaurantAdapter implements SearchRestaurantInterface {
                         restaurantModel.getOpeningHours(),
                         restaurantModel.getTables().stream()
                                 .filter(t -> t.getStatus().equals(FREE))
-                        .map(t -> new Table(t.getNumber(), t.getSeats(), t.getStatus())).toList())
+                        .map(t -> new Table(t.getId(),t.getNumber(), t.getSeats(), t.getStatus())).toList())
         ).toList();
     }
 }
