@@ -1,0 +1,53 @@
+services:
+  - type: database
+    name: postgres
+    plan: free
+    image: postgres:latest
+    envVars:
+      - key: POSTGRES_DB
+        value: mydatabase
+      - key: POSTGRES_PASSWORD
+        value: secret
+      - key: POSTGRES_USER
+        value: myuser
+      - key: TZ
+        value: America/Sao_Paulo
+    volumes:
+      - path: /var/lib/postgresql/data
+        name: postgres-data
+
+  - type: web
+    name: reservibe
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: DATABASE_URL
+        value: jdbc:postgresql://postgres:5432/mydatabase
+      - key: DATABASE_USER
+        value: myuser
+      - key: DATABASE_PASSWORD
+        value: secret
+      - key: TZ
+        value: America/Sao_Paulo
+    ports:
+      - containerPort: 8080
+    dependsOn:
+      - postgres
+
+  - type: web
+    name: pgadmin
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile.pgadmin
+    envVars:
+      - key: PGADMIN_DEFAULT_EMAIL
+        value: pgadmin4@pgadmin.org
+      - key: PGADMIN_DEFAULT_PASSWORD
+        value: admin
+      - key: TZ
+        value: America/Sao_Paulo
+    ports:
+      - containerPort: 5050
+    dependsOn:
+      - postgres
