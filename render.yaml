@@ -1,3 +1,6 @@
+envVarGroups:
+  - name: reservibe-environment
+
 services:
   - type: web
     name: reservibe
@@ -5,10 +8,7 @@ services:
     plan: free
     dockerfilePath: ./Dockerfile
     envVars:
-      - key: DATABASE_URL
-      - key: DATABASE_USER
-      - key: DATABASE_PASSWORD
-      - key: TZ
+      - fromGroup: reservibe-environment
 
   - type: web
     name: pgadmin
@@ -16,6 +16,4 @@ services:
     plan: free
     dockerfilePath: ./Dockerfile.pgadmin
     envVars:
-      - key: PGADMIN_DEFAULT_EMAIL
-      - key: PGADMIN_DEFAULT_PASSWORD
-      - key: TZ
+      - fromGroup: reservibe-environment
