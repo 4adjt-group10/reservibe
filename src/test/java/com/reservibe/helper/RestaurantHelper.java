@@ -125,7 +125,7 @@ public class RestaurantHelper {
                 openingHours,tableInputs);
     }
 
-    public final RestaurantInput createRestaurantInputWithStatus(String name, String city, String cuisine, String status1, String status2){
+    public final RestaurantInput createRestaurantInputWithStatus(String name, String city, String cuisine, String status1){
         List<OpeningHours> openingHours = new ArrayList<>();
         OpeningHours openingHours1 = new OpeningHours(DayOfWeek.MONDAY, LocalTime.now(),LocalTime.now());
         OpeningHours openingHours2 = new OpeningHours(DayOfWeek.FRIDAY, LocalTime.now(),LocalTime.now());
@@ -133,7 +133,7 @@ public class RestaurantHelper {
         openingHours.add(openingHours2);
         openingHours.add(openingHours3);
         openingHours.add(openingHours1);
-        List<TableInput> tableInputs = helper.createTableInputWithStatus(status1,status2);
+        List<TableInput> tableInputs = helper.createTableInputWithStatus(status1);
         var addres = new Address("street",
                 123,
                 "neighborhood",

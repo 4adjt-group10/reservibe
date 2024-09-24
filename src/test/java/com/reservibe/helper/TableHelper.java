@@ -24,10 +24,10 @@ public class TableHelper {
 
         return new TableInput(1,4, TableStatus.FREE);
     }
-    public final List<TableInput> createTableInputWithStatus(String status1, String status2){
+    public final List<TableInput> createTableInputWithStatus(String status1){
         List<TableInput> tableList = new ArrayList<>();
         TableInput table1 = new TableInput(1,4, TableStatus.valueOf(status1));
-        TableInput table2 = new TableInput(2,6, TableStatus.valueOf(status2));
+        TableInput table2 = new TableInput(2,6, TableStatus.valueOf(status1));
         tableList.add(table1);
         tableList.add(table2);
         return tableList;
