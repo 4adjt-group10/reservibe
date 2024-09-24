@@ -19,5 +19,3 @@ services:
       - key: PGADMIN_DEFAULT_EMAIL
       - key: PGADMIN_DEFAULT_PASSWORD
       - key: TZ
-
-fromGroup: reservibe-environment
