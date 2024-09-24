@@ -6,13 +6,9 @@ services:
     dockerfilePath: ./Dockerfile
     envVars:
       - key: DATABASE_URL
-        value: ${DATABASE_URL}
       - key: DATABASE_USER
-        value: ${DATABASE_USER}
       - key: DATABASE_PASSWORD
-        value: ${DATABASE_PASSWORD}
       - key: TZ
-        value: America/Sao_Paulo
 
   - type: web
     name: pgadmin
@@ -21,8 +17,7 @@ services:
     dockerfilePath: ./Dockerfile.pgadmin
     envVars:
       - key: PGADMIN_DEFAULT_EMAIL
-        value: ${PGADMIN_DEFAULT_EMAIL}
       - key: PGADMIN_DEFAULT_PASSWORD
-        value: ${PGADMIN_DEFAULT_PASSWORD}
       - key: TZ
-        value: America/Sao_Paulo
+
+fromGroup: reservibe-environment
