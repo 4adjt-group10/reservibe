@@ -1,45 +1,51 @@
 Feature: Restaurant
 
- Scenario Template: Register restaurant with
-    Given that I access the reservibe restaurant api
-    When I put "<name>", "<address>", "<phonenumber>", "<description>", "<cuisine>", "<openingHours>" and "<tables>"
-    Then the return must be "201" success
-    And the restaurant must be presented
+ Scenario Template: Register restaurant
+    Given I create a restaurant with "<name>" and "<city>" and "<cuisine>"
+    Then the return must be "200"
    Examples:
-     | name | address | phonenumber | description | cuisine | openingHours | tables |
+     |name         |city     |cuisine|
+     |Restaurante 1|São Paulo|TURKISH|
+     |Restaurante 2|São Paulo|INDIAN|
+     |Restaurante 3|Rio de Janeiro|ITALIAN|
 
-  Scenario Template: Register restaurant without tables
-    Given that I access the reservibe restaurant api
-    When I put "<name>", "<address>", "<phonenumber>", "<description>", "<cuisine>", "<openingHours>"
-    Then the return must be "400" unsuccess
+  Scenario: Register restaurant without tables
+    Given I create a restaurant without tables
+    Then the return must be "400"
+
+  Scenario Template: Read restaurant by city
+    Given I create a restaurant with "<name>" and "<city>" and "<cuisine>"
+    When I look for a restaurant by city
+    Then the return must be "200"
+    And the restaurants city should be like "<city>"
     Examples:
-      | name | address | phonenumber | description | cuisine | openingHours |
+      |name         |city     |cuisine|
+      |Restaurante 4|São Paulo|TURKISH|
+      |Restaurante 5|Campos do Jordão|FRENCH|
 
 
-  Scenario Template: Read restaurant by type
+  Scenario: Read restaurant by address
     Given that there is a saved restaurant
-    When I look for a restaurant by "<type>"
-    Then the return must be "200" success
-    And the restaurant must be presented
+    When I look for a restaurant by address
+    Then the return must be "200"
+
+
+  Scenario Template: Read restaurant by cuisine
+    Given I create a restaurant with "<name>" and "<city>" and "<cuisine>"
+    When I look for a restaurant by cuisine
+    Then the return must be "200"
     Examples:
-      |type   |
-      |name   |
-      |address|
-      |cuisine|
+      |name         |city     |cuisine|
+      |Restaurante 10|São Paulo|TURKISH|
+      |Restaurante 20|Jacutinga|JAPANESE|
 
-  Scenario: Read all restaurants
-    Given that there are some saved restaurants
-    When I look for all restaurant
-    Then the return must be "200" success
-    And all restaurants must be presented
 
-  #Scenario: Update restaurant
-    #Given that there is a saved restaurant
-    #When I update the restaurant
-    #Then the return must be "200" success
-    #And the restaurant must be presented
+  Scenario Template: Read restaurant by name
+    Given I create a restaurant with "<name>" and "<city>" and "<cuisine>"
+    When I look for a restaurant by name
+    Then the return must be "200"
+    Examples:
+      |name           |city     |cuisine|
+      |Restaurante 181 |São Paulo|TURKISH|
+      |Restaurante 2122|Serra Negra|CHINESE|
 
-  Scenario: Delete restaurant
-    Given that there is a saved restaurant
-    When I delete a restaurant
-    Then the return must be "204" success
