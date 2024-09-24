@@ -6,11 +6,11 @@ services:
     dockerfilePath: ./Dockerfile
     envVars:
       - key: DATABASE_URL
-        value: jdbc:postgresql://dpg-crovi3g8fa8c73dq5se0-a:5432/reservibe
+        value: ${DATABASE_URL}
       - key: DATABASE_USER
-        value: reservibe_user
+        value: ${DATABASE_USER}
       - key: DATABASE_PASSWORD
-        value: e6Szg513GyrhXOPdAZ8nc15vbvO9LLOF
+        value: ${DATABASE_PASSWORD}
       - key: TZ
         value: America/Sao_Paulo
 
@@ -21,8 +21,8 @@ services:
     dockerfilePath: ./Dockerfile.pgadmin
     envVars:
       - key: PGADMIN_DEFAULT_EMAIL
-        value: pgadmin4@pgadmin.org
+        value: ${PGADMIN_DEFAULT_EMAIL}
       - key: PGADMIN_DEFAULT_PASSWORD
-        value: admin
+        value: ${PGADMIN_DEFAULT_PASSWORD}
       - key: TZ
         value: America/Sao_Paulo
