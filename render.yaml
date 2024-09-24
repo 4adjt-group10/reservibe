@@ -9,11 +9,3 @@ services:
     dockerfilePath: ./Dockerfile
     envVars:
       - fromGroup: reservibe-environment
-
-  - type: web
-    name: pgadmin
-    env: docker
-    plan: free
-    dockerfilePath: ./Dockerfile.pgadmin
-    envVars:
-      - fromGroup: reservibe-environment
