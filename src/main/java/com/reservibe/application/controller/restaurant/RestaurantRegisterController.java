@@ -1,11 +1,14 @@
 package com.reservibe.application.controller.restaurant;
 
+import com.reservibe.application.response.GenericResponse;
+import com.reservibe.domain.generic.output.OutputInterface;
 import com.reservibe.domain.input.restaurant.RestaurantInput;
 import com.reservibe.domain.usecase.restaurant.register.RegisterRestaurantUseCase;
 import com.reservibe.infra.adapter.restaurant.RegisterRestaurantAdapter;
 import com.reservibe.infra.repository.restaurant.RestaurantRepository;
 import com.reservibe.infra.repository.table.TableModelRepository;
 import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,8 +27,11 @@ public class RestaurantRegisterController {
     }
 
     @PostMapping
-    public void registerRestaurant(@RequestBody @Valid RestaurantInput input) {
+    public ResponseEntity<Object> registerRestaurant(@RequestBody @Valid RestaurantInput input) {
         RegisterRestaurantUseCase registerRestaurantUseCase = new RegisterRestaurantUseCase(new RegisterRestaurantAdapter(restaurantRepository,tableModelRepository));
         registerRestaurantUseCase.execute(input);
+        OutputInterface outputInterface = registerRestaurantUseCase.getRegisterOutput();
+        outputInterface.getOutputStatus();
+        return new GenericResponse().response(outputInterface);
     }
 }

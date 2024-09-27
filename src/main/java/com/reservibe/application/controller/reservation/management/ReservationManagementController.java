@@ -1,5 +1,7 @@
 package com.reservibe.application.controller.reservation.management;
 
+import com.reservibe.application.response.GenericResponse;
+import com.reservibe.domain.generic.output.OutputInterface;
 import com.reservibe.domain.input.reservation.ReservationManagementInput;
 import com.reservibe.domain.usecase.reservation.ManagementReservationUsecase;
 import com.reservibe.infra.adapter.reservation.ManagementReservationAdapter;
@@ -7,6 +9,7 @@ import com.reservibe.infra.adapter.reservation.SearchReservationAdapter;
 import com.reservibe.infra.adapter.table.UpdateTableAdapter;
 import com.reservibe.infra.repository.reservation.ReservationRepository;
 import com.reservibe.infra.repository.table.TableModelRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -23,12 +26,15 @@ public class ReservationManagementController {
     }
 
     @PostMapping("/{id}")
-    public void manageReservation(@PathVariable UUID id,
-                                  @RequestBody ReservationManagementInput reservation) {
+    public ResponseEntity<Object> manageReservation(@PathVariable UUID id,
+                                                    @RequestBody ReservationManagementInput reservation) {
         ManagementReservationUsecase managementReservationUsecase = new ManagementReservationUsecase(
                 new ManagementReservationAdapter(reservationRepository),
                 new SearchReservationAdapter(reservationRepository),
                 new UpdateTableAdapter(tableModelRepository));
         managementReservationUsecase.execute(id,reservation);
+        OutputInterface outputInterface = managementReservationUsecase.getManagementOutput();
+        outputInterface.getOutputStatus();
+        return new GenericResponse().response(outputInterface);
     }
 }

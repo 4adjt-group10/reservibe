@@ -1,11 +1,14 @@
 package com.reservibe.application.controller.review;
 
+import com.reservibe.application.response.GenericResponse;
+import com.reservibe.domain.generic.output.OutputInterface;
 import com.reservibe.domain.input.review.ReviewInput;
 import com.reservibe.domain.usecase.review.RegisterReviewUseCase;
 import com.reservibe.infra.adapter.reservation.SearchReservationAdapter;
 import com.reservibe.infra.adapter.review.CreateReviewAdapter;
 import com.reservibe.infra.repository.reservation.ReservationRepository;
 import com.reservibe.infra.repository.review.ReviewRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,10 +27,13 @@ public class RegisterReviewController {
     }
 
     @PostMapping
-    public void createReview(@RequestBody ReviewInput input) {
+    public ResponseEntity<Object> createReview(@RequestBody ReviewInput input) {
         RegisterReviewUseCase registerReviewUseCase = new RegisterReviewUseCase(
                 new CreateReviewAdapter(reviewRepository,
                 new SearchReservationAdapter(reservationRepository)));
         registerReviewUseCase.execute(input);
+        OutputInterface outputInterface = registerReviewUseCase.getReviewOutput();
+        outputInterface.getOutputStatus();
+        return new GenericResponse().response(outputInterface);
     }
 }
