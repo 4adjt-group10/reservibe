@@ -71,6 +71,9 @@ public class Restaurant {
         this.tables = new ArrayList<>();
     }
 
+    public Restaurant() {
+    }
+
     public UUID getId() {
         return id;
     }

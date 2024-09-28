@@ -5,6 +5,8 @@ import com.reservibe.domain.generic.output.OutputStatus;
 import com.reservibe.domain.output.restaurant.RestaurantListOutput;
 import com.reservibe.infra.adapter.restaurant.SearchRestaurantAdapter;
 
+import java.util.ArrayList;
+
 public class SearchRestaurantByAddressUseCase {
 
     private final SearchRestaurantAdapter searchRestaurantAdapter;
@@ -14,7 +16,12 @@ public class SearchRestaurantByAddressUseCase {
     }
 
     public RestaurantListOutput execute(Address address) {
-        return new RestaurantListOutput(searchRestaurantAdapter.findAllByAddress(address),
-                new OutputStatus(200, "OK", "Restaurants found successfully"));
+        var restaurantList = searchRestaurantAdapter.findAllByAddress(address);
+        if(!restaurantList.isEmpty()){
+            return new RestaurantListOutput(restaurantList,
+                    new OutputStatus(200, "OK", "Restaurants found successfully"));
+        }
+        return new RestaurantListOutput(new ArrayList<>(),
+                new OutputStatus(400, "Bad Request ", "Restaurants not found"));
     }
 }
