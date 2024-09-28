@@ -17,7 +17,7 @@ public class GenericResponse {
         }
 
         if (outputInterface.getOutputStatus().getCode() == 404) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(outputInterface.getBody());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
         if (outputInterface.getOutputStatus().getCode() == 204) {
@@ -25,11 +25,11 @@ public class GenericResponse {
         }
 
         if (outputInterface.getOutputStatus().getCode() == 422) {
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(outputInterface.getBody());
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
         }
 
         if (outputInterface.getOutputStatus().getCode() == 400) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(outputInterface.getBody());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(outputInterface.getBody());

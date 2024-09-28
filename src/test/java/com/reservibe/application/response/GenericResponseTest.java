@@ -56,7 +56,6 @@ class GenericResponseTest {
         ResponseEntity<Object> response = genericResponse.response(outputInterface);
 
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-        assertEquals("Not Found", response.getBody());
     }
 
     @Test
@@ -80,7 +79,6 @@ class GenericResponseTest {
         ResponseEntity<Object> response = genericResponse.response(outputInterface);
 
         assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, response.getStatusCode());
-        assertEquals("Unprocessable Entity", response.getBody());
     }
 
     @Test
@@ -92,7 +90,6 @@ class GenericResponseTest {
         ResponseEntity<Object> response = genericResponse.response(outputInterface);
 
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-        assertEquals("Bad Request", response.getBody());
     }
 
     @Test
