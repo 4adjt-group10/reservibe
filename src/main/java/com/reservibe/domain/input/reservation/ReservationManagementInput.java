@@ -7,11 +7,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public record ReservationManagementInput(
-        Client client,
-        LocalDateTime reservationDate,
-        UUID tableID,
-        ReservationStatus status,
-        String notesObservations
-
+        UUID reservationID,
+        ReservationStatus status
 ) {
 }

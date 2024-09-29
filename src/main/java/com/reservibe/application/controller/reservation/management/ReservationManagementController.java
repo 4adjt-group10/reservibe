@@ -25,14 +25,13 @@ public class ReservationManagementController {
         this.tableModelRepository = tableModelRepository;
     }
 
-    @PostMapping("/{id}")
-    public ResponseEntity<Object> manageReservation(@PathVariable UUID id,
-                                                    @RequestBody ReservationManagementInput reservation) {
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> manageReservation(@RequestBody ReservationManagementInput input) {
         ManagementReservationUsecase managementReservationUsecase = new ManagementReservationUsecase(
                 new ManagementReservationAdapter(reservationRepository),
                 new SearchReservationAdapter(reservationRepository),
                 new UpdateTableAdapter(tableModelRepository));
-        managementReservationUsecase.execute(id,reservation);
+        managementReservationUsecase.execute(input);
         OutputInterface outputInterface = managementReservationUsecase.getManagementOutput();
         outputInterface.getOutputStatus();
         return new GenericResponse().response(outputInterface);
