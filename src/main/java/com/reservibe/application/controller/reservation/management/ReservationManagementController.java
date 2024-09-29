@@ -10,9 +10,10 @@ import com.reservibe.infra.adapter.table.UpdateTableAdapter;
 import com.reservibe.infra.repository.reservation.ReservationRepository;
 import com.reservibe.infra.repository.table.TableModelRepository;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.UUID;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/reservation/management")

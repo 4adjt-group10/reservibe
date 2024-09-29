@@ -12,8 +12,6 @@ import com.reservibe.infra.adapter.reservation.ManagementReservationAdapter;
 import com.reservibe.infra.adapter.reservation.SearchReservationAdapter;
 import com.reservibe.infra.adapter.table.UpdateTableAdapter;
 
-import java.util.UUID;
-
 public class ManagementReservationUsecase {
     private final ManagementReservationAdapter managementReservationAdapter;
     private final SearchReservationAdapter searchReservationAdapter;
