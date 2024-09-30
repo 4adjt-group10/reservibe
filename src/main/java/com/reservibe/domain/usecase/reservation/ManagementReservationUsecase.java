@@ -12,8 +12,6 @@ import com.reservibe.infra.adapter.reservation.ManagementReservationAdapter;
 import com.reservibe.infra.adapter.reservation.SearchReservationAdapter;
 import com.reservibe.infra.adapter.table.UpdateTableAdapter;
 
-import java.util.UUID;
-
 public class ManagementReservationUsecase {
     private final ManagementReservationAdapter managementReservationAdapter;
     private final SearchReservationAdapter searchReservationAdapter;
@@ -28,20 +26,20 @@ public class ManagementReservationUsecase {
         this.updateTableAdapter = updateTableAdapter;
     }
 
-    public void execute(UUID id, ReservationManagementInput reservation) {
+    public void execute(ReservationManagementInput input) {
         try{
-            var reserv = searchReservationAdapter.findById(id);
+            var reservation = searchReservationAdapter.findById(input.reservationID());
 
-            Reservation reservationUpdate = new Reservation(reserv.getId(),
-                    reservation.client(),
-                    reservation.status(),
-                    reservation.reservationDate(),
-                    reserv.getTable(),
-                    reservation.notesObservations());
+            Reservation reservationUpdate = new Reservation(reservation.getId(),
+                    reservation.getClient(),
+                    input.status(),
+                    reservation.getReservationDate(),
+                    reservation.getTable(),
+                    reservation.getNotesObservations());
             managementReservationAdapter.updateReservation(reservationUpdate);
-            if(ReservationStatus.FINISH.equals(reservation.status()) ||
-                    ReservationStatus.CANCELLED.equals(reservation.status())){
-                updateTableAdapter.updateTableWithStatus(reserv.getTable().getId(),TableStatus.FREE);
+            if(ReservationStatus.FINISH.equals(input.status()) ||
+                    ReservationStatus.CANCELLED.equals(input.status())){
+                updateTableAdapter.updateTableWithStatus(reservation.getTable().getId(),TableStatus.FREE);
             }
             this.managementOutput = new ManagementOutput(new OutputStatus(200, "ok", "ok"));
         }catch (Exception e){
