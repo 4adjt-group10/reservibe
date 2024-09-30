@@ -1,12 +1,13 @@
 package com.reservibe.domain.entity.reservation;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.reservibe.domain.entity.client.Client;
 import com.reservibe.domain.entity.table.Table;
 import com.reservibe.domain.enums.reservation.ReservationStatus;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Reservation {
 
     private UUID id;

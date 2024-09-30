@@ -45,25 +45,24 @@ class ManagementReservationUsecaseTest {
         openMocks.close();
     }
 
-//    @Test
-//    void execute() {
-//        UUID id = UUID.randomUUID();
-//        var createReservationInput = createReservationInput();
-//        var createReservation = createReservation();
-//        when(searchReservationAdapter.findById(id)).thenReturn(createReservation);
-//        doNothing().when(managementReservationAdapter).updateReservation(any(Reservation.class));
-//
-//
-//        managementReservationUsecase.execute(createReservationInput);
-//        verify(managementReservationAdapter, times(1)).updateReservation(any(Reservation.class));
-//    }
+    @Test
+    void execute() {
+        UUID id = UUID.randomUUID();
+        var createReservationInput = createReservationInput(id);
+        var createReservation = createReservation();
+        when(searchReservationAdapter.findById(id)).thenReturn(createReservation);
+        doNothing().when(managementReservationAdapter).updateReservation(any(Reservation.class));
 
-    public final ReservationManagementInput createReservationInput() {
-        var client = new Client("name_teste", "email@test.com", "9998845436", "11234543210");
+
+        managementReservationUsecase.execute(createReservationInput);
+        verify(managementReservationAdapter, times(1)).updateReservation(any(Reservation.class));
+    }
+
+    public final ReservationManagementInput createReservationInput(UUID id) {
+
         ReservationStatus status = ReservationStatus.PENDING;
-        LocalDateTime reservationDate = LocalDateTime.now();
-        UUID tableID = UUID.randomUUID();
-        return new ReservationManagementInput(tableID ,status);
+
+        return new ReservationManagementInput(id ,status);
     }
 
     public final Reservation createReservation() {

@@ -26,7 +26,7 @@ public class ReservationManagementController {
         this.tableModelRepository = tableModelRepository;
     }
 
-    @PutMapping("/{id}")
+    @PutMapping()
     public ResponseEntity<Object> manageReservation(@RequestBody ReservationManagementInput input) {
         ManagementReservationUsecase managementReservationUsecase = new ManagementReservationUsecase(
                 new ManagementReservationAdapter(reservationRepository),
