@@ -28,11 +28,19 @@ public class Table {
         this.status = status;
     }
 
+
     public Table(UUID id, Integer number, int seats, TableStatus status) {
         this.id = id;
         this.number = number;
         this.seats = seats;
         this.status = status;
+    }
+
+    public Table(UUID id, Integer number, int seats) {
+        this.id = id;
+        this.number = number;
+        this.seats = seats;
+
     }
 
     public UUID getId() {

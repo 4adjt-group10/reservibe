@@ -25,20 +25,19 @@ public class SearchReservationAdapter implements SearchReservationInterface {
     @Override
     public List<Reservation> findReservationByRestaurantId(UUID id) {
         return reservationRepository.listByRestaurantId(id)
-        .stream().map(r -> {
-            TableModel tableModel = r.getTable();
-            return new Reservation(
-                    r.getId(),
-                    r.getClient(),
-                    r.getStatus(),
-                    r.getReservationDate(),
-                    new Table(tableModel.getId(),
-                            tableModel.getNumber(),
-                            tableModel.getSeats(),
-                            tableModel.getStatus()),
-                    r.getNotesObservations()
-            );
-        }).toList();
+                .stream().map(r -> {
+                    TableModel tableModel = r.getTable();
+                    return new Reservation(
+                            r.getId(),
+                            r.getClient(),
+                            r.getStatus(),
+                            r.getReservationDate(),
+                            new Table(tableModel.getId(),
+                                    tableModel.getNumber(),
+                                    tableModel.getSeats()),
+                            r.getNotesObservations()
+                    );
+                }).toList();
     }
 
     @Override
