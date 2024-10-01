@@ -58,7 +58,7 @@ A API RESTful possui endpoints para operações como:
    #####
 5. **Cadastro de Avaliação**
     - Endpoint: `POST /review/create`
-    - Descrição: Permite que o usuário faça uma avaliação do restaurante. A reserva precisa estar com status CONFIRMED.
+    - Descrição: Permite que o usuário faça uma avaliação do restaurante. A reserva precisa estar com status CONFIRMED e os dados do cliente devem ser identicos aos utilizados no momento da reserva.
    #####
 6. **Finalização de Reserva**
     - Endpoint: `PUT /reservation/management`
