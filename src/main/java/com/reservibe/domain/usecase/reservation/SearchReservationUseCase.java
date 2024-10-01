@@ -1,7 +1,7 @@
 package com.reservibe.domain.usecase.reservation;
 
 import com.reservibe.domain.generic.output.OutputStatus;
-import com.reservibe.domain.output.reservation.ReservationListSearchList;
+import com.reservibe.domain.output.reservation.ReservationListOutput;
 import com.reservibe.infra.adapter.reservation.SearchReservationAdapter;
 
 import java.util.ArrayList;
@@ -15,13 +15,13 @@ public class SearchReservationUseCase {
         this.searchReservationAdapter = searchReservationAdapter;
     }
 
-    public ReservationListSearchList execute(UUID restaurantId) {
+    public ReservationListOutput execute(UUID restaurantId) {
         var reservationList = searchReservationAdapter.findReservationByRestaurantId(restaurantId);
         if(!reservationList.isEmpty()){
-            return new ReservationListSearchList(reservationList,
+            return new ReservationListOutput(reservationList,
                     new OutputStatus(200, "OK", "Reservations found successfully"));
         }
-        return new ReservationListSearchList(new ArrayList<>(),
+        return new ReservationListOutput(new ArrayList<>(),
                 new OutputStatus(400, "Bad Request", "Reservations not found"));
     }
 }

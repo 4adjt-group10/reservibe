@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 
-public class ReservationSearche {
+public class ReservationSearch {
 
     private UUID id;
     private Client client;
@@ -16,7 +16,7 @@ public class ReservationSearche {
     private LocalDateTime reservationDate;
     private String notesObservations;
 
-    public ReservationSearche(UUID id, Client client, ReservationStatus status, LocalDateTime reservationDate,  String notesObservations) {
+    public ReservationSearch(UUID id, Client client, ReservationStatus status, LocalDateTime reservationDate, String notesObservations) {
         this.id = id;
         this.client = client;
         this.status = status;
@@ -25,9 +25,9 @@ public class ReservationSearche {
     }
 
     @Deprecated(since = "Only for framework use")
-    public ReservationSearche() {}
+    public ReservationSearch() {}
 
-    public ReservationSearche(Client client, ReservationStatus status, LocalDateTime reservationDate,  String notesObservations) {
+    public ReservationSearch(Client client, ReservationStatus status, LocalDateTime reservationDate, String notesObservations) {
 
         this.client = client;
         this.status = status;

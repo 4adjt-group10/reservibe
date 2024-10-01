@@ -2,7 +2,7 @@ package com.reservibe.application.controller.reservation.management;
 
 import com.reservibe.application.response.GenericResponse;
 import com.reservibe.application.response.PresenterResponse;
-import com.reservibe.domain.output.reservation.ReservationListSearchList;
+import com.reservibe.domain.output.reservation.ReservationListOutput;
 import com.reservibe.domain.presenters.reservation.ReservationListPresenter;
 import com.reservibe.domain.usecase.reservation.SearchReservationUseCase;
 import com.reservibe.infra.adapter.reservation.SearchReservationAdapter;
@@ -28,7 +28,7 @@ public class SearchReservationController {
     @GetMapping("/{restaurantId}")
     public ResponseEntity<Object> searchReservationById(@PathVariable UUID restaurantId) {
         SearchReservationUseCase searchReservationUseCase = new SearchReservationUseCase(new SearchReservationAdapter(reservationRepository));
-        ReservationListSearchList listOutput = searchReservationUseCase.execute(restaurantId);
+        ReservationListOutput listOutput = searchReservationUseCase.execute(restaurantId);
         if (listOutput.getOutputStatus().getCode() != 200) {
             return new GenericResponse().response(listOutput);
         }

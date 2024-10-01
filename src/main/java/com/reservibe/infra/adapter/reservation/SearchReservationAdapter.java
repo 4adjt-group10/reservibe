@@ -2,7 +2,6 @@ package com.reservibe.infra.adapter.reservation;
 
 import com.reservibe.domain.entity.client.Client;
 import com.reservibe.domain.entity.reservation.Reservation;
-import com.reservibe.domain.entity.reservation.ReservationSearche;
 import com.reservibe.domain.entity.restaurant.Restaurant;
 import com.reservibe.domain.entity.table.Table;
 import com.reservibe.domain.enums.reservation.ReservationStatus;
@@ -24,15 +23,21 @@ public class SearchReservationAdapter implements SearchReservationInterface {
     }
 
     @Override
-    public List<ReservationSearche> findReservationByRestaurantId(UUID id) {
+    public List<Reservation> findReservationByRestaurantId(UUID id) {
         return reservationRepository.listByRestaurantId(id)
-                .stream().map(r -> new ReservationSearche(
-                        r.getId(),
-                        r.getClient(),
-                        r.getStatus(),
-                        r.getReservationDate(),
-                        r.getNotesObservations()
-                )).toList();
+                .stream().map(r -> {
+                    TableModel tableModel = r.getTable();
+                    return new Reservation(
+                            r.getId(),
+                            r.getClient(),
+                            r.getStatus(),
+                            r.getReservationDate(),
+                            new Table(tableModel.getId(),
+                                    tableModel.getNumber(),
+                                    tableModel.getSeats()),
+                            r.getNotesObservations()
+                    );
+                }).toList();
     }
 
     @Override
