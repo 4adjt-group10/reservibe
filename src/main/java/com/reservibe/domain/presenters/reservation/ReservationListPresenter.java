@@ -2,16 +2,16 @@ package com.reservibe.domain.presenters.reservation;
 
 import com.reservibe.domain.generic.output.OutputInterface;
 import com.reservibe.domain.generic.presenter.PresenterInterface;
-import com.reservibe.domain.output.reservation.ReservationListOutput;
+import com.reservibe.domain.output.reservation.ReservationListSearchList;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class ReservationListPresenter implements PresenterInterface {
 
-    private final ReservationListOutput listOutput;
+    private final ReservationListSearchList listOutput;
 
-    public ReservationListPresenter(ReservationListOutput listOutput) {
+    public ReservationListPresenter(ReservationListSearchList listOutput) {
         this.listOutput = listOutput;
     }
 
