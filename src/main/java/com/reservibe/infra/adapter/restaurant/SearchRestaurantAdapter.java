@@ -19,7 +19,7 @@ public class SearchRestaurantAdapter implements SearchRestaurantInterface {
     public SearchRestaurantAdapter(RestaurantRepository restaurantRepository) {
         this.restaurantRepository = restaurantRepository;
     }
-    //TODO: Dividir métodos em adapters específicos?
+
     @Override
     public Restaurant findRestaurantByName(String name) {
         return restaurantRepository.findByName(name).map(restaurantModel ->
